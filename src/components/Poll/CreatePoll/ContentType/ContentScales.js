@@ -70,7 +70,7 @@ const ContentScales = ({data5, setData5, setInputList, inputList, handleChangeIn
       };
     
     const classes = useStyles();
-    const url="http://localhost:8080/polls"
+    const url="https://targetsynergy-backend.herokuapp.com/polls"
    
     const id = useContext(IdContext)
     const submit = (e) => {

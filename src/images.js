@@ -1,10 +1,10 @@
 import axios from 'axios'
 let images=[]
-axios.get(`http://localhost:8080/mcq/6111987e577ed827f026487b`)
+axios.get(`https://targetsynergy-backend.herokuapp.com/mcq/6111987e577ed827f026487b`)
 .then(res=>{
   console.log(res)
   res.data.choices.map((post,id)=>(
-    images.push({id,altText:"images",url: `http://localhost:8080/file/download/${post.text}`,count:0})
+    images.push({id,altText:"images",url: `https://targetsynergy-backend.herokuapp.com/file/download/${post.text}`,count:0})
   ))
   console.log(images)
 })

@@ -9,7 +9,7 @@ const Vote = (props) => {
   // const id = useContext(IdContext);
   // const url = id.id;
     useEffect(async () => {
-      var result = await axios.get(`http://localhost:8080/MCQ/${url}`)
+      var result = await axios.get(`https://targetsynergy-backend.herokuapp.com/MCQ/${url}`)
       setTextBased({
         question: result.data.question,
         choices: result.data.choices 

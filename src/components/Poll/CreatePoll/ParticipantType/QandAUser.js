@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 const QandAUser = (props) => {
   const url =props.match.params.id;
   const [question,setquestion]=useState({question:""})
-  axios.get(`http://localhost:8080/QandA/${url}`).then(res=>{
+  axios.get(`https://targetsynergy-backend.herokuapp.com/QandA/${url}`).then(res=>{
         
         setquestion({question:res.data.question})
        
@@ -46,7 +46,7 @@ const QandAUser = (props) => {
      
     
     const classes = useStyles();
-    const uri=`http://localhost:8080/responses/${url}`
+    const uri=`https://targetsynergy-backend.herokuapp.com/responses/${url}`
     
    
     const submit = (e) => {

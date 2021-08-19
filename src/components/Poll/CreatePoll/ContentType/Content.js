@@ -78,7 +78,7 @@ const Content = ({setData1,data1, setResult, result, inputList,setInputList, han
       };
     
     const classes = useStyles();
-    const url="http://localhost:8080/MCQ"
+    const url="https://targetsynergy-backend.herokuapp.com/MCQ"
     const id = useContext(IdContext);
     const submit = (e) => {
     e.preventDefault();

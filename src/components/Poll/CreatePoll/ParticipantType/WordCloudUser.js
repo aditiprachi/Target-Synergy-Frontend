@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 const WordCloudUser = (props) => {
   const u =props.match.params.id;
   const [question,setquestion]=useState({question:""})
-  axios.get(`http://localhost:8080/WC/${u}`)
+  axios.get(`https://targetsynergy-backend.herokuapp.com/WC/${u}`)
         .then(res=>{
               setquestion({question:res.data.question})
        
@@ -45,7 +45,7 @@ const WordCloudUser = (props) => {
      
     
     const classes = useStyles();
-    const url=`http://localhost:8080/responses/${u}`
+    const url=`https://targetsynergy-backend.herokuapp.com/responses/${u}`
     
    
     const submit = (e) => {

@@ -114,7 +114,7 @@ export default function User({setAuth}) {
                       )}
                         onLogoutSuccess={onSuccess}
                         uxMode="redirect"
-                        redirect_uri="http://localhost:3000/"
+                        redirect_uri="https://targetsynergy.herokuapp.com/"
                     >   
                    </GoogleLogout>
                   </MenuItem >

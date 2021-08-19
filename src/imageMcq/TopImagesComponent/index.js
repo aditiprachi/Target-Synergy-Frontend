@@ -43,7 +43,7 @@ const FavoriteImages = ({ images }) => {
   // const id = useContext(IdContext);
   // const url = id.id;
     useEffect(async () => {
-      var result = await axios.get(`http://localhost:8080/mcq/6111987e577ed827f026487b`)
+      var result = await axios.get(`https://targetsynergy-backend.herokuapp.com/mcq/6111987e577ed827f026487b`)
       console.log(result)
       setTextBased({
         question: result.data.question,

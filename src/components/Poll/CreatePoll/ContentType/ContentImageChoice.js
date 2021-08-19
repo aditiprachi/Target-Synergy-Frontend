@@ -68,7 +68,7 @@ const ContentImageChoice = ({setData2, data2, handleChangeIndex, state, setState
         console.log(state.selectedFile);
         console.log(formData);
       
-        axios.post("http://localhost:8080/file/upload", formData,{headers:{"Content-Type" : "application/json"}})
+        axios.post("https://targetsynergy-backend.herokuapp.com/file/upload", formData,{headers:{"Content-Type" : "application/json"}})
         .then(res=>{
           console.log(res)
           images[i]=({option:(res.data)})
@@ -110,7 +110,7 @@ const ContentImageChoice = ({setData2, data2, handleChangeIndex, state, setState
       };
     
     const classes = useStyles();
-    const url="http://localhost:8080/mcq"
+    const url="https://targetsynergy-backend.herokuapp.com/mcq"
     const submit = (e) => {
 
    e.preventDefault();

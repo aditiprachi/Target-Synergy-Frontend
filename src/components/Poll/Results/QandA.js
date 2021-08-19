@@ -50,7 +50,7 @@ export const box = styled.div`
 const OpenEnded = () => {
   const data =[ 1, 2 ,3, 4, 5, 6, 7, 8]
   const [question,setquestion]=useState({question:""})
-   axios.get(`http://localhost:8080/QandA/611cc06c056cc02203b25413`)
+   axios.get(`https://targetsynergy-backend.herokuapp.com/QandA/611cc06c056cc02203b25413`)
    .then(res=>{
         
          setquestion({question:res.data.question})
@@ -58,7 +58,7 @@ const OpenEnded = () => {
     })
     const [OpenEndedResponses , setOpenEndedResponses] = useState({responses:[]});
   
-    axios.get(`http://localhost:8080/responses/611ac9536bc994626e4d6beb`)
+    axios.get(`https://targetsynergy-backend.herokuapp.com/responses/611ac9536bc994626e4d6beb`)
     .then(res=>{
       console.log(res)
       setOpenEndedResponses({

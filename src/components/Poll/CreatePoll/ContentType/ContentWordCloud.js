@@ -52,7 +52,7 @@ const ContentWordCloud = ({data4,setData4,handleChangeIndex}) => {
  
   
     const classes = useStyles();
-    const url="http://localhost:8080/WC"
+    const url="https://targetsynergy-backend.herokuapp.com/WC"
     
     const id = useContext(IdContext);
     const submit = (e) => {

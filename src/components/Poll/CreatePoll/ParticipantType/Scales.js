@@ -25,7 +25,7 @@ const useStyles = makeStyles({
     const [questions , setQuestions] = useState({questions:[]});
  
     useEffect(async () => {
-      var result = await axios.get(`http://localhost:8080/QandA/${id}`)
+      var result = await axios.get(`https://targetsynergy-backend.herokuapp.com/QandA/${id}`)
       setQuestions({
        
         questions: result.data.questions 
@@ -64,7 +64,7 @@ console.log(qAndA);
       
         response:[]
     })
-    const url="http://localhost:8080/QandAResponse"
+    const url="https://targetsynergy-backend.herokuapp.com/QandAResponse"
     const submit = (e) => {
 
       e.preventDefault();

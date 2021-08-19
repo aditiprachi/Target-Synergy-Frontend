@@ -41,7 +41,7 @@ const ContentQandA = ({data6, setData6,handleChangeIndex}) => {
    });
  
  const classes = useStyles();
- const url="http://localhost:8080/QandA"
+ const url="https://targetsynergy-backend.herokuapp.com/QandA"
  const id = useContext(IdContext);
 
  const submit = (e) => {

@@ -51,7 +51,7 @@ export const box = styled.div`
 const WordCloud = () => {
     
   const [question,setquestion]=useState({question:""})
-   axios.get(`http://localhost:8080/WordCloud/109`)
+   axios.get(`https://targetsynergy-backend.herokuapp.com/WordCloud/109`)
    .then(res=>{
         
          setquestion({question:res.data.question})
@@ -59,7 +59,7 @@ const WordCloud = () => {
     })
 
 const wcr=[];
-axios.get(`http://localhost:8080/WordCloudResponse/611ac9536bc994626e4d6beb`)
+axios.get(`https://targetsynergy-backend.herokuapp.com/WordCloudResponse/611ac9536bc994626e4d6beb`)
 .then(res=>{
     console.log(res.data)
 let i=0

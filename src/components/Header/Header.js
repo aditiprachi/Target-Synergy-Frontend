@@ -94,7 +94,7 @@ function Header({setAuth, auth, setContentAuth, contentauth}) {
           setContentAuth(data.googleId)
           console.log(contentauth);
           console.log(data);
-            axios.post("http://localhost:8080/newUser", data)
+            axios.post("https://targetsynergy-backend.herokuapp.com/newUser", data)
             .then(r =>console.log("success"))
             .catch(err => { 
             console.error(err);
@@ -170,7 +170,7 @@ function Header({setAuth, auth, setContentAuth, contentauth}) {
                                         onFailure={ onFailure}
                                         cookiePolicy={'single_host_origin'}
                                         uxMode="redirect"
-                                        redirect_uri="http://localhost:3000/"
+                                        redirect_uri="https://targetsynergy.herokuapp.com/"
                                         isSignedIn={true}
                                     >
                                     </GoogleLogin>

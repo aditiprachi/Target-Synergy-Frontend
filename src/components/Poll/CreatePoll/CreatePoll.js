@@ -41,7 +41,7 @@ const CreatePoll = () => {
     };
     const id = useContext(IdContext);
     const uri = id.id;
-    const text = `http://localhost:3000${uri}`
+    const text = `https://targetsynergy.herokuapp.com${uri}`
     return (
         <div className='bx'>
             
