@@ -1,0 +1,17 @@
+.MuiCardMedia-media {
+    margin: auto;
+   width: 100px !important;
+   height: 100px;
+}
+
+.MuiCard-root {
+    width: 100%;
+    margin: auto;
+}
+.MuiPaper-root{
+    background-color: white ;
+}
+
+.MuiCardActionArea-root {
+    margin: 20px 60px !important;
+}
