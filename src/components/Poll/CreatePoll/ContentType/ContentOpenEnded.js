@@ -69,7 +69,7 @@ const ContentOpenEnded = (props) => {
     
       
      <Button
-        style={{ width: "235px",background:"#cc0000", color:"white" }}
+        style={{ width: "90%",background:"#cc0000", color:"white" }}
         className={classes.button}
         variant="contained"
        // color="primary"

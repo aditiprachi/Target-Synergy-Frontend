@@ -20,7 +20,7 @@ import { Grid } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
  tablabel: {
-   minWidth: 65, maxWidth: 400,
+   minWidth: 50, maxWidth: 400,
    flexGrow: 1,
       flexShrink: 1,
  }
@@ -65,7 +65,7 @@ function a11yProps(index) {
 
 
 const Sidebar = ({ parentCallback, color, textcolor, clickHandler, setOpacity, togglePopup, component, setData1, data1, data2, setData2, data3, setData3, setData5, data5, 
-data6, setData6, data4, setData4, setResult, result, inputList1, setInputList1, setState, state, inputListScales, setInputListScales, settextcolor, contentauth, imgresult, setImgResult }) => {
+data6, setData6, data4, setData4, setResult, result, inputList1, setInputList1, setState, state, inputListScales, setInputListScales, settextcolor, contentauth, imgresult, setImgResult, img, setUri }) => {
 
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
@@ -83,15 +83,16 @@ data6, setData6, data4, setData4, setResult, result, inputList1, setInputList1, 
    
    const classes = useStyles();
     return (
-        <Grid className="Sidebar" style={ { flexGrow: 1, flexShrink: 1}}>
-                  <AppBar position="static" color="default" style={{marginTop: '0%'}} style={{flexGrow: 1, flexShrink: 1}}>
+        <Grid className="Sidebar" style={ {  height:"100%", width: '28%', marginTop: '0%'}}>
+                  <AppBar position="static" color="default">
         <Tabs
           value={value}
           onChange={handleChange}
           indicatorColor="primary"
           textColor="primary"
           aria-label="full width tabs example"
-          style={{flex: '1'}}
+         
+          
         >
           <Tab label="Type" {...a11yProps(0)} className={classes.tablabel} />
           <Tab label="Content" {...a11yProps(1)}className={classes.tablabel} />
@@ -105,14 +106,14 @@ data6, setData6, data4, setData4, setResult, result, inputList1, setInputList1, 
       >
         <TabPanel value={value} index={0} dir={theme.direction}  >
           <PollType 
-          clickHandler={clickHandler} handleChangeIndex={handleChangeIndex} style={{flex: '1'}}  />
+          clickHandler={clickHandler} handleChangeIndex={handleChangeIndex} style={{flex: '1', height: '100%'}}  />
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}style={{flex: '1'}}>
         {component==="multiplechoice" && <Content setData1={setData1} data1={data1} setResult={setResult} result={result} inputList={inputList1} setInputList={setInputList1} handleChangeIndex={handleChangeIndex} contentauth={contentauth}/>}
         {component==="qanda" && <ContentQandA data6={data6} setData6={setData6} handleChangeIndex={handleChangeIndex} />}
         {component==="wordcloud" && <ContentWordCloud data4={data4} setData4={setData4} handleChangeIndex={handleChangeIndex}/>}
         {component==="openended" && <ContentOpenEnded setOpenEnded={setData3} OpenEnded={data3} handleChangeIndex={handleChangeIndex}/>}
-       {component==="imagechoice" && <ContentImageChoice setData2={setData2} data2={data2} setImgResult={setImgResult} imgresult={imgresult} handleChangeIndex={handleChangeIndex} setState={setState} state={state}/>} 
+       {component==="imagechoice" && <ContentImageChoice setData2={setData2} data2={data2} setImgResult={setImgResult} imgresult={imgresult} handleChangeIndex={handleChangeIndex} setState={setState} state={state} image={img} setUri={setUri}/>} 
        {component==="scales" && <ContentScales data5={data5} setData5={setData5} handleChangeIndex={handleChangeIndex} inputList={inputListScales} setInputList={setInputListScales}/>}
 
         </TabPanel>

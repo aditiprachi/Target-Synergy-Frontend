@@ -93,15 +93,15 @@ export default function User({setAuth}) {
                            
                     <SettingsIcon fontSize="small"  />
                     
-                  </ListItemIcon>
+                    </ListItemIcon>
                     <ListItemText primary="SETTINGS"   /> 
                   </MenuItem>
               {/*</Link> */}
              {/* <Link to="settingspage" style={{color:"black", textDecoration:"none" }}>*/}
                     
-                  <MenuItem className={classes.root} onClick={handleClose}>
+               {/*   <MenuItem className={classes.root} onClick={handleClose}>
                     <ListItemText primary="Notifications"   /> 
-                  </MenuItem>
+                  </MenuItem> */}
             <MenuItem className={classes.root} onClick={handleClose}>
               
             <GoogleLogout
@@ -123,8 +123,8 @@ export default function User({setAuth}) {
                   
                  
                   
-              <MenuItem className={classes.head} >
-                  <ListItemIcon>
+               {/* <MenuItem className={classes.head} >
+                <ListItemIcon>
               <PeopleIcon fontSize="small" />
               </ListItemIcon>
                   <ListItemText primary="TEAM MEMBERS" />    
@@ -135,7 +135,7 @@ export default function User({setAuth}) {
             <MenuItem className={classes.root} onClick={handleClose}>
               <ListItemText primary="Existing"   /> 
                   </MenuItem>
-             {/* </Link> */}
+             {/* </Link> */} 
               
           </StyledMenu>
     </div>

@@ -68,15 +68,14 @@ const QandAUser = (props) => {
     }
 
     return (
-      <Container  style={{ display: "flex", justifyContent: "center", alignItems: "center", height: '100%', flexDirection:'column', marginTop: '2%' }} >
+      <Container className={classes.root}  style={{ display: "flex", justifyContent: "center", alignItems: "center", height: '100%', flexDirection:'column', marginTop: '2%', width: '50%' }} >
            <form onSubmit={submit} className={classes.root} noValidate autoComplete="off"><h4 className={classes.h}>blabla{question.question}</h4>
       
       <h5>Write Your Answer Here:</h5>
       <TextField id="outlined-multiline-static" multiline rows={4} label="Your Answers" variant="outlined" size="small" onChange={(e)=>handle(e)} id="latestAnswer" value={OpenEndedAnswer.latestAnswer} type="text" style={{width: '100%'}} />
-    
-      
+    <div style={{display: 'flex',flexDirection: 'row', width: '100%', justifyContent: 'center',alignItems: "center"}}>
      <Button
-        style={{ width: "100%",background:"#cc0000", color:"white" }}
+        style={{ width: "40%",background:"#cc0000", color:"white" }}
         className={classes.button}
         variant="contained"
        // color="primary"
@@ -85,6 +84,14 @@ const QandAUser = (props) => {
         onClick={submit}
       >Submit
       </Button>
+      <Button
+        style={{ width: "40%",background:"#cc0000", color:"white"}}
+        className={classes.button}
+        variant="contained"
+       // color="primary"
+        size="large"
+       >View Result
+      </Button></div>
   
        </form>
        </Container>

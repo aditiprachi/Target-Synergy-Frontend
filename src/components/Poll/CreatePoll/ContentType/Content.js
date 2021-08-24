@@ -12,11 +12,11 @@ import axios from 'axios'
 const useStyles = makeStyles((theme) => ({
     root: {
         flex: 1,
-      '& > *': {
-        margin: theme.spacing(1),
-        width: '100%',
+        flexGrow: 1,
+        flexShrink: 1
       
-      },
+      
+      
     },
     h:{
       fontSize: '15px',
@@ -70,8 +70,8 @@ const Content = ({setData1,data1, setResult, result, inputList,setInputList, han
  
   // handle click event of the Add button
   const handleAddClick = () => {
-    setInputList([...inputList, { choice: "" }]);
-    setResult([...result, { distance: 0, colors: ["#ffd847", "#e0a106"], }]);
+    setInputList([...inputList, { option:"", votes: 0 }]);
+    setResult([...result, { distance: 0, colors: ["#ffd847", "#e0a106"], choices: "" }]);
   };
       const handleChange = (event) => {
         setState({ ...state, [event.target.name]: event.target.checked });
@@ -83,15 +83,18 @@ const Content = ({setData1,data1, setResult, result, inputList,setInputList, han
     const submit = (e) => {
     e.preventDefault();
       inputList.map((choicee,key)=>{
-        data1.choice[key]=choicee.choice
+        data1.option[key]=choicee
+
       })
       const a = contentauth;
       
       const q ={
         question: data1.question,
-        choices: data1.choice,
+        choices:data1.option,
         googleId : a
+      
       }
+      console.log(q)
       console.log(q)
      
       axios.post(url, q)
@@ -114,7 +117,7 @@ const Content = ({setData1,data1, setResult, result, inputList,setInputList, han
 
 
     return (
-      <div >
+      <div style={{height: '100%'}} >
           <form onSubmit={submit} className={classes.root} noValidate autoComplete="off"><h4 className={classes.h}>Your Question</h4>
       
      
@@ -122,6 +125,7 @@ const Content = ({setData1,data1, setResult, result, inputList,setInputList, han
         <h4 className={classes.h}>Options</h4>
         <Grid container={true}  direction="row"  alignItems="center" 
 >
+  
 {inputList.map((x, i) => {
         return (
           <div key={i} >
@@ -129,9 +133,9 @@ const Content = ({setData1,data1, setResult, result, inputList,setInputList, han
             id="multiplechoice"
             variant="outlined" size="small"
             className="ml10"
-            name="choice"
+            name="option"
             label="Enterchoice"
-            value={x.choice}
+            value={x.option}
             style={{width: '100%'}}
             onChange={e => handleInputChange(e, i)}
             />
@@ -147,7 +151,7 @@ const Content = ({setData1,data1, setResult, result, inputList,setInputList, han
       })}
     
       </Grid>  <Button
-        style={{ width: "235px",background:"#cc0000", color:"white" }}
+        style={{ width: "100%",background:"#cc0000", color:"white" }}
         className={classes.button}
         variant="contained"
        // color="primary"

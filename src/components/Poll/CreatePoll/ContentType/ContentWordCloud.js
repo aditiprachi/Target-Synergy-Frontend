@@ -8,11 +8,10 @@ import { IdContext } from '../../../../App';
 const useStyles = makeStyles((theme) => ({
     root: {
         flex: 1,
-      '& > *': {
-        margin: theme.spacing(1),
+      
         width: '100%',
       
-      },
+      
     },
     h:{
       fontSize: '15px',
@@ -78,12 +77,12 @@ const ContentWordCloud = ({data4,setData4,handleChangeIndex}) => {
     return (
       <div >
           <form onSubmit={submit} className={classes.root} noValidate autoComplete="off">
-        <h4 className={classes.h}>Please enter the question</h4>
-        <TextField id="outlined-basic" label="Your multiple choice question" variant="outlined" size="small" onChange={(e)=>handle(e)} id="question" value={data4.question} type="text" style={{width: '100%'}} />
+        <h3 > Question</h3>
+        <TextField id="outlined-basic" label="Your question" variant="outlined" size="small" onChange={(e)=>handle(e)} id="question" value={data4.question} type="text" style={{width: '100%'}} />
 
     
    <Button
-        style={{ width: "235px",background:"#cc0000", color:"white" }}
+        style={{ width: "90%",background:"#cc0000", color:"white", justifycontent: 'center' }}
         className={classes.button}
         variant="contained"
        // color="primary"

@@ -9,20 +9,17 @@
  
     
 }
-.Navbar{
-  width: 1280px;
-}
+
 
 .Sidebar{
-  float: left;
+ 
   font-family:  Helvetica;
-  max-height: 500px;
-  min-width: none;
-  max-width: 300px;
+  max-height: 490px;
+  min-height: 490px;
   overflow-y: scroll;
   display: display-inside;
   position: relative;
-  margin-left: -100px;
+  
   }
 
 .Presentation{
