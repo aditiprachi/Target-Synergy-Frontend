@@ -4,7 +4,7 @@ import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Slider from '@material-ui/core/Slider';
 import { Container } from '@material-ui/core';
 
-const Scales =({data5,inputList}) => {
+const Scales =({data5,inputList, textcolor}) => {
     const ScaleSlider = withStyles({
         root: {
           color: '#52af77',
@@ -36,11 +36,11 @@ const Scales =({data5,inputList}) => {
       })(Slider);
     return(
         <div>
-            <h1>{data5.question}</h1>
+          <h1 style={{color: textcolor}}>{data5.question}</h1>
         {inputList.map((x,i)=>{
             return(
             <Container key={i}>
-        <b style={{textAlign: 'left'}}>{inputList[i].choice}</b>  
+        <b style={{textAlign: 'left'}}>{inputList[i].option}</b>  
      <ScaleSlider  defaultValue={0}  />
 </Container>)
         })}

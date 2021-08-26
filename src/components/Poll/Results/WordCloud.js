@@ -74,20 +74,22 @@ console.log(wcr)
 let wcrs=[...wcr]
 console.log(wcrs)
 
+
 const resizeStyle = {
 display: "flex",
 alignItems: "center",
 justifyContent: "center",
 border: "solid 1px #ddd",
-width: '97%%',
+width: '80%',
 height: '100%',
-marginTop: '5%'
+
+
 };
 const callbacks = {
-getWordColor: word => word.value > 50 ? "blue" : "red",
+//getWordColor: word => word.value > 50 ? "blue" : "red",
 onWordClick: console.log,
 onWordMouseOver: console.log,
-getWordTooltip: word => `${word.text} (${word.value}) [${word.value > 50 ? "" : ""}]`,
+//getWordTooltip: word => `${word.text} (${word.value}) [${word.value > 50 ? "" : ""}]`,
 }
 
 const options = {
@@ -95,29 +97,29 @@ colors: ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b"],
 enableTooltip: true,
 deterministic: false,
 fontFamily: "helvetica",
-fontSizes: [ 30, 100],
+fontSizes: [ 20, 90],
 fontStyle: "normal",
 fontWeight: "normal",
 padding: 1,
 rotations: 2,
-rotationAngles: [0, 90, -90],
+rotationAngles: [0],
 scale: "sqrt",
 spiral: "archimedean",
 transitionDuration: 1000
 };
-const size = [1200, 400];
+//const size = [1200, 400];
 
 return (
-<div >
-<h1 style={{fontFamily: "Helvetica", textAlign: 'center'}} >{question.question}</h1>
+<div style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',height:'100%',width:'100%'}} >
+<h1 style={{fontFamily: "Helvetica", textAlign: 'center'}} >kk{question.question}</h1>
 
 
   <div style={resizeStyle}>
 <ReactWordcloud
   callbacks={callbacks}
   options={options}
-  size={size}
-  words={wcr}
+
+  words={wcrs}
 />
 </div>
 </div>

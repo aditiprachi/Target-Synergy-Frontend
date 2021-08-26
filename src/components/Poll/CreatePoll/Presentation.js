@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import MultipleChoice from "./PollType/MultipleChoice";
 import WordCloud from './PollType/WordCloud';
-import ImageChoice from './PollType/ImageChoice';
+import Ranking from './PollType/Ranking';
 import Scales from './PollType/Scales';
 import QandA from './PollType/QandA'
 import OpenEnded from './PollType/OpenEnded';
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
-const Presentation = ({color, textcolor, component, opacity, img, data1, data2, data3,data5,data4,data6, result, inputList1,state, imgresult, inputListScales,images}) => {
+const Presentation = ({color, textcolor, component, opacity, img, data1, data2, data3,data5,data4,data6, result, inputListMC, inputListScales, inputListRanking}) => {
     const classes = useStyles();
 
     return (
@@ -41,8 +41,8 @@ const Presentation = ({color, textcolor, component, opacity, img, data1, data2, 
                     }}
                     >
                    
-        {component === 'imagechoice' && <ImageChoice data2={data2} images={state} imgresult={imgresult} img={images} />} 
-        {component === 'multiplechoice' && <MultipleChoice data1={data1} result={result} inputList={inputList1}/>  }
+        {component === 'ranking' && <Ranking data2={data2} inputList={inputListRanking}  />} 
+        {component === 'multiplechoice' && <MultipleChoice data1={data1} result={result} inputList={inputListMC}/>  }
         {component === 'wordcloud' && <WordCloud data4={data4}/>} 
         {component === 'qanda' && <QandA data6={data6}/>} 
         {component === 'scales' && <Scales data5={data5} inputList={inputListScales}/>} 

@@ -56,7 +56,6 @@ const ContentOpenEnded = (props) => {
       newdata[e.target.id]=e.target.value
       props.setOpenEnded(newdata)
       console.log(newdata)
-
     }
 
 

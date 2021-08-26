@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useContext } from 'react'
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import Slider from '@material-ui/core/Slider';
@@ -7,9 +7,12 @@ import { ImageRounded } from '@material-ui/icons';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { SliderPicker } from 'react-color'
+import { IdContext } from '../../../../App';
+
+import axios from 'axios'
 
 
-const Background=({parentCallback, color, setOpacity, togglePopup, textcolor, changecolor}) => {
+const BackgroundScales=({parentCallback, color, setOpacity, opacity, togglePopup, textcolor, changecolor, BackgroundImage}) => {
   
   const [showColorPicker, setShowColorPicker] = useState(false)    
   
@@ -35,24 +38,40 @@ const Background=({parentCallback, color, setOpacity, togglePopup, textcolor, ch
     },
     }));
     const classes = useStyles();
-    const [value, setValue] = React.useState(100);
+   // const [value, setValue] = React.useState(100);
 
     const handleSliderChange = (event, newValue) => {
-      setValue(newValue);
+      
       setOpacity(newValue);
     };
     
     const handleInputChange = (event) => {
-      setValue(event.target.value === '' ? '' : Number(event.target.value));
       setOpacity(event.target.value === '' ? '' : Number(event.target.value));
     };
     const handleBlur = () => {
-        if (value < 0) {
-          setValue(0);
-        } else if (value > 100) {
-          setValue(100);
+        if (opacity < 0) {
+          setOpacity(0);
+        } else if (opacity > 100) {
+          setOpacity(100);
         }
       };
+     const url="https://targetsynergy-backend.herokuapp.com/polls"
+      const id = useContext(IdContext);
+    const submit=(e)=>{
+      e.preventDefault();
+     const q={
+       bgcolor: color,
+       textcolor: textcolor,
+       opacity: opacity/100,
+       bgimagekey: BackgroundImage.key
+     }
+      axios.put(url, q)
+         .then(res=>{
+            console.log(res.data);
+            id.setId(res.data);
+            console.log(id.id);
+          })
+    }
 
     return (
         <div >
@@ -102,7 +121,7 @@ const Background=({parentCallback, color, setOpacity, togglePopup, textcolor, ch
         </Grid>
         <Grid item xs>
           <Slider
-            value={typeof value === 'number' ? value : 0}
+            value={typeof opacity === 'number' ? opacity : 0}
             onChange={handleSliderChange}
             aria-labelledby="input-slider"
           />
@@ -110,7 +129,7 @@ const Background=({parentCallback, color, setOpacity, togglePopup, textcolor, ch
         <Grid item>
           <Input
             className={classes.input}
-            value={value}
+            value={opacity}
             margin="dense"
             onChange={handleInputChange}
             onBlur={handleBlur}
@@ -123,9 +142,10 @@ const Background=({parentCallback, color, setOpacity, togglePopup, textcolor, ch
             }}
           />%
         </Grid>
-      </Grid>
+        </Grid>
+        <Button >Submit</Button>
         </div>
     )
 }
 
-export default Background
+export default BackgroundScales

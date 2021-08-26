@@ -4,32 +4,68 @@ import axios from 'axios'
 import { IdContext } from '../../../../IdContext';
 
 
-const wcr=[];
+const wcr=[{
+  text: 'poll',
+  value: 64,
+},
+{
+  text: 'live',
+  value: 11,
+},
+{
+  text: 'thought',
+  value: 16,
+},
+{
+  text: 'Bad',
+  value: 9,
+},
+{
+  text: 'Good',
+  value: 19,
+},
+{
+  text: 'Opinion',
+  value: 11,
+},
+{
+  text: 'Word',
+  value: 89,
+},
+{
+  text: 'Cloud',
+  value: 29,
+},
+{
+  text: 'Capture',
+  value: 23,
+},
+{
+  text: 'Matters',
+  value: 10,
+},
+{
+  text: 'happy',
+  value: 50,
+},
+{
+  text: 'Innovation',
+  value: 91,
+},
+{
+  text: 'Curious',
+  value: 15,
+},
+{
+  text: 'Interactive',
+  value: 60,
+},];
 const WordCloud=({data4,textcolor})=>{
-  const id = useContext(IdContext);
-  const url = id.id;
-
-    useEffect(async () => {
-      var result = await axios.get(`https://targetsynergy-backend.herokuapp.com${url}`)
-      console.log(result.data)
-
-    let i=0
-    Object.entries(result.data).forEach(([key, value]) => {
-  result.value = true;
-  wcr[i]=({text:`${key}`, value:`${value}`})
-  i++
-})
-console.log(wcr)
-},[]);
-let wcrs=[...wcr]
-console.log(wcrs)
-
-
   const callbacks = {
-    getWordColor: word => word.value > 50 ? "blue" : "red",
+   //getWordColor: word => word.value > 50 ? "blue" : "red",
     onWordClick: console.log,
     onWordMouseOver: console.log,
-    getWordTooltip: word => `${word.text} (${word.value}) [${word.value > 50 ? "good" : "bad"}]`,
+   // getWordTooltip: word => `${word.text} (${word.value}) [${word.value > 50 ? "good" : "bad"}]`,
   }
  
   const options = {
@@ -37,27 +73,28 @@ console.log(wcrs)
     enableTooltip: true,
     deterministic: false,
     fontFamily: "helvetica",
-    fontSizes: [ 30, 100],
+    fontSizes: [ 10, 75],
     fontStyle: "normal",
-    fontWeight: "normal",
+    fontWeight: "bold",
     padding: 1,
     rotations: 2,
-    rotationAngles: [0, 90, -90],
+    rotationAngles: [0],
     scale: "sqrt",
     spiral: "archimedean",
     transitionDuration: 1000
   };
-  const size = [600, 200];
+ 
 
     return (
-      <div>
+      <div style={{width:'100%',height: '100%', display: 'flex',flexDirection:'column'}}>
         <h1 style={{color: textcolor}}>{data4.question}</h1>
-        <div style={{display: 'flex',width: '50%'}}>
+        <div style={{display: 'flex',width: '100%', height: '90%', border: '1px black',justifyContent:'center',alignItems: 'center'}}>
       <ReactWordcloud
         callbacks={callbacks}
         options={options}
-        size={size}
+    
         words={wcr}
+        style={{width:'100%',height:'100%'}}
       />
       </div>
       </div>

@@ -25,15 +25,17 @@ const Vote = (props) => {
   const history = useHistory();
   const url =props.match.params.id;
   const [textBased , setTextBased] = useState({question:'', choices:[]})
+  const [Bg, setBg]=useState({bgcolor:'',textcolor:'',opacity:1})
     useEffect(async () => {
       var result = await axios.get(`https://targetsynergy-backend.herokuapp.com/MCQ/${url}`)
-     
       setTextBased({
         question: result.data.question,
         choices: result.data.choices
         
       })
-    },[url])
+      
+
+    },[])
     const choice=[];
     textBased.choices.map((post,key) => (
     choice[key]=({option:(post.option), votes:post.votes})

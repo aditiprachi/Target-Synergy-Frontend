@@ -4,7 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import randomColor from 'randomcolor'
 import axios from 'axios'
-const id=27
+
+
 const useStyles = makeStyles((theme) => ({
     root: {
         flex: 1,
@@ -40,53 +41,66 @@ float: left;
 
 
 export const box = styled.div`
-  height: 1%;
-
-`;
-const OpenEnded = () => {
-  const [question,setquestion]=useState({question:""})
-   axios.get(`https://targetsynergy-backend.herokuapp.com/OpenEnded/611972bf71e57871d4321fe4`)
-   .then(res=>{
-        
-         setquestion({question:res.data.question})
-       
-    })
-    const [OpenEndedResponses , setOpenEndedResponses] = useState({responses:[]});
+  height: 1%;`;
   
-    axios.get(`https://targetsynergy-backend.herokuapp.com/responses/611ac9536bc994626e4d6beb`)
-    .then(res=>{
-      console.log(res)
-      setOpenEndedResponses({
-        responses: res.data.responses
+const OpenEnded = (props) => {
+  const url = props.match.params.id;
+  const [OpenEndedResponses , setOpenEndedResponses] =useState({responses:[]});
+  const [resUrl, setResUrl] = useState("");
+  const [question,setquestion]=useState({question:"tgyh"})
+
+  axios.get(`https://targetsynergy-backend.herokuapp.com/OE/${url}`)
+   .then(res=>{
+         setquestion({question:res.data.question})
+         console.log(question);
+    })
+    .catch((error)=>{
+      console.log(error)
+    })
+
+    
+      useEffect(async ()=>{
+        
+        await axios.get(`https://targetsynergy-backend.herokuapp.com/quest/${url}`)
+      .then(result => {
+        setResUrl(result.data);
+      // console.log(resUrl);
       })
-    })
-    .catch (error=> {
-      console.log(error.response);
-    })
-
-    console.log(OpenEndedResponses)
-    console.log(question)
-
+      .catch(error => console.log(error))
+   
+    },[])
+        
+      if(resUrl !== ""){
+        axios.get(`https://targetsynergy-backend.herokuapp.com/responses/${resUrl}`)
+        .then ((res) => {
+          setOpenEndedResponses({responses: res.data.responses})
+        })
+        .catch(error => console.log(error))
+      }
+    
+    
+    const choice=OpenEndedResponses.responses;
     const classes = useStyles();
     
     return (
       <div>
-      <div> <h1 style={{fontFamily:"Helvetica",  textAlign:"center"}} > {question.question}</h1></div>
-          <div style={{justifyContent: 'space-evenly',display: 'flex', flexWrap: 'wrap', width: '100%'}} >
-           {OpenEndedResponses.responses.map((x, i) => {
-           var color = randomColor();
+        {/* {choice.map((post,key) => {
+  console.log(post);
+})} */}
+      <div> <h1 style={{fontFamily:"Helvetica",  textAlign:"center", fontSize:"10px"}} >{question.question} </h1></div>
+          <div style={{justifyContent: 'space-evenly',display: 'flex', flexWrap: 'wrap', width: '60%'}} >
+           {choice.map((x, i) => {
+           const color = randomColor({count:1});
       return(
          
          <Container>
-           
-  
-                  <Box color="white" bgcolor="#cc0000" p={1} fontFamily= "Helvetica" style={{ backgroundColor:'#cc0000', width: '100%'}} >
-                {x}
-                  </Box>
-                 </Container>
+            <Box color="white" bgcolor={color} p={1} fontFamily= "Helvetica" style={{ backgroundColor:{color}, width: '100%'}} >
+                    {x}
+            </Box>
+          </Container>
          
       )
-      })}
+      })} 
       </div>
       </div>
     );

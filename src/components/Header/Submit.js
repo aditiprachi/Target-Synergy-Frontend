@@ -9,6 +9,9 @@ function Home({code}) {
        history.push(path);
        window.location.reload();
        
+
+    
+       
    }
    
    console.log(url)

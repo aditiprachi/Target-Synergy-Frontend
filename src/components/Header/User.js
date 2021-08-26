@@ -37,9 +37,9 @@ const useStyles = makeStyles(() => ({
     
     },
   head: {
-      backgroundColor: '#ff8080',
+      backgroundColor: '#d3d3d3',
       '&:hover': {
-        backgroundColor: '#ff8080',
+        backgroundColor: '#d3d3d3',
         disableRipple: true ,
         },
       

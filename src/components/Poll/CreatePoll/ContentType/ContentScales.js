@@ -48,10 +48,14 @@ const ContentScales = ({data5, setData5, setInputList, inputList, handleChangeIn
 
   // handle input change
   const handleInputChange = (e, index) => {
-    const { name, value } = e.target;
+    console.log(inputList)
     const list = [...inputList];
-    list[index][name] = value;
+    console.log(inputList)
+    list[index][e.target.name] = e.target.value;
+    
     setInputList(list);
+    
+   console.log(inputList)
   };
  
   // handle click event of the Remove button
@@ -59,30 +63,36 @@ const ContentScales = ({data5, setData5, setInputList, inputList, handleChangeIn
     const list = [...inputList];
     list.splice(index, 1);
     setInputList(list);
+    // const r = [...result];
+    // console.log(result);
+    // r.splice(index, 1);
+    // setResult(r);
   };
+ 
  
   // handle click event of the Add button
   const handleAddClick = () => {
-    setInputList([...inputList, { choice: "" }]);
+    setInputList([...inputList, { option:"", votes: 0 }]);
   };
       const handleChange = (event) => {
         setState({ ...state, [event.target.name]: event.target.checked });
       };
     
     const classes = useStyles();
-    const url="https://targetsynergy-backend.herokuapp.com/polls"
+    const url="https://targetsynergy-backend.herokuapp.com/SC"
    
     const id = useContext(IdContext)
     const submit = (e) => {
 
       e.preventDefault();
-      inputList.map((choicee,key)=>{
-        data5.choice[key]=choicee.choice
-      })
+      // inputList.map((choicee,key)=>{
+      //   data5.option[key]=choicee.option
+      // })
   
       const q ={
         question: data5.question,
-       choices: data5.choice
+       choices: inputList,
+       googleId: "a"
       }
       console.log(q)
       axios.post(url, q)
@@ -123,9 +133,9 @@ const ContentScales = ({data5, setData5, setInputList, inputList, handleChangeIn
             id="outlined-basic"
             style={{width: '100%'}}
               className="ml10"
-              name="choice"
+              name="option"
    placeholder="Enter Statement"
-              value={x.choice}
+              value={x.option}
               onChange={e => handleInputChange(e, i)}
             />
             <div>
@@ -156,4 +166,4 @@ const ContentScales = ({data5, setData5, setInputList, inputList, handleChangeIn
 
 
 
-export default ContentScales
+export default ContentScales;
