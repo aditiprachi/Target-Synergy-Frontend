@@ -47,7 +47,7 @@ const OpenEnded = (props) => {
   const url = props.match.params.id;
   const [OpenEndedResponses , setOpenEndedResponses] =useState({responses:[]});
   const [resUrl, setResUrl] = useState("");
-  const [question,setquestion]=useState({question:"tgyh"})
+  const [question,setquestion]=useState({question:""})
 
   axios.get(`https://targetsynergy-backend.herokuapp.com/OE/${url}`)
    .then(res=>{
@@ -87,7 +87,7 @@ const OpenEnded = (props) => {
         {/* {choice.map((post,key) => {
   console.log(post);
 })} */}
-      <div> <h1 style={{fontFamily:"Helvetica",  textAlign:"center", fontSize:"10px"}} >{question.question} </h1></div>
+      <div> <h1 style={{ marginTop:"50px", fontFamily:"Helvetica",  textAlign:"center", fontSize:"30px"}} >{question.question} </h1></div>
           <div style={{justifyContent: 'space-evenly',display: 'flex', flexWrap: 'wrap', width: '60%'}} >
            {choice.map((x, i) => {
            const color = randomColor({count:1});

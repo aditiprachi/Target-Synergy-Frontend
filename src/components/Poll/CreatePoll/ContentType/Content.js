@@ -76,12 +76,21 @@ const Content = ({setData1,data1, setResult, result, inputList,setInputList, han
       const handleChange = (event) => {
         setState({ ...state, [event.target.name]: event.target.checked });
       };
-    
+    const [errorMessage, setErrorMessage] = useState(0);
     const classes = useStyles();
     const url="https://targetsynergy-backend.herokuapp.com/MCQ"
     const id = useContext(IdContext);
     const submit = (e) => {
     e.preventDefault();
+    console.log(inputList.length)
+    const l=inputList.length
+    if(l===1){
+      setErrorMessage(1);
+      console.log(errorMessage)
+      
+    }
+    else{
+      setErrorMessage(0);
       inputList.map((choicee,key)=>{
         data1.option[key]=choicee
 
@@ -103,7 +112,8 @@ const Content = ({setData1,data1, setResult, result, inputList,setInputList, han
               id.setId(res.data);
               console.log(id.id);
             })
-
+          
+      {handleChangeIndex(2)}}
     }
 
 
@@ -149,7 +159,9 @@ const Content = ({setData1,data1, setResult, result, inputList,setInputList, han
         
         );
       })}
-    
+    {errorMessage===1 && (
+  <h5 style={{color: '#cc0000',}}> Please add atleast one more option!</h5>
+)}
       </Grid>  <Button
         style={{ width: "100%",background:"#cc0000", color:"white" }}
         className={classes.button}
@@ -157,7 +169,7 @@ const Content = ({setData1,data1, setResult, result, inputList,setInputList, han
        // color="primary"
         size="large"
         fullWidth={true}
-        onClick={(e)=>{handleChangeIndex(2);submit(e)}}
+        onClick={(e)=>{submit(e)}}
       >Submit
       </Button>
   

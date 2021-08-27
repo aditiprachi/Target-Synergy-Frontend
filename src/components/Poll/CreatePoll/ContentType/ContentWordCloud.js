@@ -10,8 +10,7 @@ const useStyles = makeStyles((theme) => ({
         flex: 1,
       
         width: '100%',
-      
-      
+
     },
     h:{
       fontSize: '15px',
@@ -32,53 +31,34 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const ContentWordCloud = ({data4,setData4,handleChangeIndex}) => {
-     const [state, setState] = React.useState({
-         checkedA: false,
-         checkedB: false,
-         checkedC: false,
-      });
-    
-     const [inputList, setInputList] = useState( {question: ""} );
+const ContentWordCloud = (props) => {
+  const handleChangeIndex=props.handleChangeIndex
+  const classes = useStyles();
+  const url="https://targetsynergy-backend.herokuapp.com/WC"
+  const id = useContext(IdContext);
+  const submit = (e) => {
+    e.preventDefault();
+    axios.post(url, props.WC)
+         .then(res=>{
+            console.log(res.data);
+            id.setId(res.data);
+            console.log(id.id);
+          })
 
-  // handle input change
-  const handleInputChange = (e, index) => {
-    const { name, value } = e.target;
-    const list = [...inputList];
-    list[index][name] = value;
-    setInputList(list);
-  };
- 
-  
-    const classes = useStyles();
-    const url="https://targetsynergy-backend.herokuapp.com/WC"
-    
-    const id = useContext(IdContext);
-    const submit = (e) => {
-      e.preventDefault();
-      axios.post(url, data4)
-           .then(res=>{
-              id.setId(res.data);
-              console.log(id.id);
-            })
+  }
+     function handle(e){
+        const newdata={...props.WC}
+        newdata[e.target.id]=e.target.value
+        props.setWC(newdata)
+        console.log(newdata)
 
     }
-
- 
-    function handle(e){
-      const newdata={...data4}
-      newdata[e.target.id]=e.target.value
-      setData4(newdata)
-      console.log(newdata)
-
-    }
-
 
     return (
       <div >
           <form onSubmit={submit} className={classes.root} noValidate autoComplete="off">
         <h3 > Question</h3>
-        <TextField id="outlined-basic" label="Your question" variant="outlined" size="small" onChange={(e)=>handle(e)} id="question" value={data4.question} type="text" style={{width: '100%'}} />
+        <TextField id="outlined-basic" label="Your question" variant="outlined" size="small" onChange={(e)=>handle(e)} id="question" value={props.WC.question} type="text" style={{width: '100%'}} />
 
     
    <Button

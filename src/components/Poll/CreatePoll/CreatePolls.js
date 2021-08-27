@@ -32,7 +32,7 @@ button: {
   const CreatePolls=(props) => {
     const [isOpen, setIsOpen] = useState(false);
     const images=[]; //for ranking
-    const [img,setimg] = useState({bg:null,key:0});
+    const [img,setimg] = useState({bg:"",key:0}); //for backgroundimage
     const [result, setResult] = useState(
      [ {
         distance: 0,
@@ -41,22 +41,15 @@ button: {
       }
     ]
     );                          //multiplechoice type
-    const [imgresult, setImgResult] = useState(
-      [
-        {
-          distance: 0,
-          colors: ["#ffd847", "#e0a106"]
-        }
-      ]
-    )
+   
     const[data1, setData1]=useState({
       question: "",
       option:[{text: ""},{votes: 0}]  
   })
      const[data2, setData2]=useState({
      question: "",
-     choice:[]
-})
+     option:[{text: ""},{votes: 0}]  
+    })
     const[data3, setData3]=useState({
     question:""
 })
@@ -74,23 +67,40 @@ const[data5, setData5]=useState({
 const [inputListMC, setInputListMC] = useState([{ option: "", votes: 0 }]);
 const [inputListScales, setInputListScales] = useState([{ choice: "" }]);
 const [inputList4, setInputList4] = useState([{ choice: "" }]);
-const [inputListRanking, setInputListRanking] = useState([{ choice: "" }]);
+const [inputListRanking, setInputListRanking] = useState([{option:"", votes: 0}]);
    
-  const handleBgImage=(newValue)=>{
-    setimg({bg:newValue});
-    if(newValue==Bgimage1){
-      setimg({key:1})
-    }
-    else if(newValue==Bgimage2){
-      setimg({key:2})
-    }
-    else if(newValue==Bgimage3){
-      setimg({key:3})
-    }
-    else{
-      setimg({key:4})
-    }
-  }
+  const handleBgImage=(e)=>{
+    switch (e) {
+      case Bgimage1:
+            var update={
+              ...img, bg: Bgimage1,
+              key:1}
+              setimg(update)
+            console.log(img)
+            break
+      case Bgimage2:
+        var update={
+       ...img, bg: Bgimage2,
+            key:2}
+        setimg(update)
+        console.log(img)
+          break
+      case Bgimage3:
+       var update={
+        ...img, bg: Bgimage3,
+        key:3}
+        setimg(update)
+        console.log(img)
+        break
+      case null:
+        var update={
+        ...img, bg: null,
+        key:0}
+        setimg(update)
+        console.log(img)
+        break
+       
+  }}
             
   const togglePopup = () => {
     setIsOpen(!isOpen);
@@ -104,16 +114,12 @@ const [inputListRanking, setInputListRanking] = useState([{ choice: "" }]);
    const [textcolor, settextcolor] = React.useState('');
    const [opacity, setOpacity]=React.useState(100);
    const [component, setComponent] = React.useState('multiplechoice');
-   const [state, setState] = React.useState({
-   selectedFile: null,
-   bgurl: ''
- });
- const [uri, setUri]=React.useState([{bgurl:''}]);
+ 
 
     const clickHandler=(e)=> {
         switch (e) {
-          case "ranking":
-                setComponent("ranking")
+          case "rating":
+                setComponent("rating")
                 console.log(component)
                 break
             case "multiplechoice":
@@ -194,10 +200,10 @@ const [inputListRanking, setInputListRanking] = useState([{ choice: "" }]);
      setOpacity={setOpacity} opacity={opacity} togglePopup={togglePopup} setData1={setData1} data1={data1} data2={data2} setData2={setData2} 
      data3={data3} setData3={setData3} data4={data4} setData4={setData4} data5={data5} setData5={setData5} result={result} setResult={setResult} inputListMC={inputListMC} setInputListMC={setInputListMC}
     images={images} inputListScales={inputListScales} setInputListScales={setInputListScales} inputList4={inputList4} setInputList4={setInputList4} textcolor={textcolor} settextcolor={settextcolor}
-    inputListRanking={inputListRanking} setInputListRanking={setInputListRanking} contentauth={props.contentauth} imgresult={imgresult} setImgResult={setImgResult} data6={data6} setData6={setData6} setState={setState} state={state} img={uri} setUri={setUri} BackgroundImage={img}/>
+    inputListRanking={inputListRanking} setInputListRanking={setInputListRanking} contentauth={props.contentauth} data6={data6} setData6={setData6} BackgroundImage={img}/>
      
      <Presentation color={color} textcolor={textcolor} images={images} opacity={opacity} component={component} img={img} data1={data1} data2={data2} data3={data3} data5={data5} result={result}
-      inputListRanking={inputListRanking} inputListMC={inputListMC}  inputListScales={inputListScales}  imgresult={imgresult} flex='1' data4={data4} data6={data6} state={state} img={uri}/>
+      inputListRanking={inputListRanking} inputListMC={inputListMC}  inputListScales={inputListScales}   flex='1' data4={data4} data6={data6}  />
      
      
     
@@ -207,42 +213,11 @@ const [inputListRanking, setInputListRanking] = useState([{ choice: "" }]);
         <b style={{color: 'black', textAlign: 'center' }}>Background Images</b>
         
         <Grid container spacing={2} style={{margin: "4px"}}>
-        <Grid item xs={6} sm={2} >
-        <h7 style={{color: "black"}}>Add your own image</h7>
-                     
-                        
-                          
-                        
-                        <Button 
-                        className={classes.button}
-                        size="small"
-                        width="10px"
-                        fullWidth={true}
-                        name="choice"
-                        style={{ width: '190px', position: 'relative', height: '60px', marginTop: '8%', marginLeft: '10%', backgroundColor: "white", color: "black"}}
-                        placeholder="Enter choice" 
-                          ><input type="file"  />
-                        </Button>
-                        <Button className={classes.button}
-                            style={{borderRadius: "2em",
-                                         size: 'small',
-                                         fontSize: '11px',
-                                         textAlign: 'center',
-                                         position: 'relative',
-                                         marginLeft: '17px',
-                                         marginTop: '0px',
-                                         width: '8%', background:"white",
-                                         color:'black'}}
-                                         
-                                         >
-                                           Set
-                        </Button>
-                    
-      
-                   
-            </Grid>
+       
                     <Grid item xs={6} sm={2} >
-                      <CardActionArea onClick={()=>setimg(Bgimage1)}>
+                      <CardActionArea 
+                      id='bg'
+                      onClick={()=>handleBgImage(Bgimage1)}>
                     <CardMedia
               component="img"
               alt="Image1"
@@ -255,7 +230,7 @@ const [inputListRanking, setInputListRanking] = useState([{ choice: "" }]);
             </Grid>
             
                     <Grid item xs={6} sm={2} >
-                    <CardActionArea onClick={()=>setimg(Bgimage2)}>
+                    <CardActionArea onClick={()=>handleBgImage(Bgimage2)}>
                     <CardMedia
               component="img"
               alt="Image2"
@@ -268,7 +243,7 @@ const [inputListRanking, setInputListRanking] = useState([{ choice: "" }]);
                     </Grid>
                    
            <Grid item xs={6} sm={2} >
-           <CardActionArea  onClick={()=>setimg(Bgimage3)} >
+           <CardActionArea  onClick={()=>handleBgImage(Bgimage3)} >
           <CardMedia
               component="img"
               alt="Image3"
@@ -281,7 +256,7 @@ const [inputListRanking, setInputListRanking] = useState([{ choice: "" }]);
                     </Grid>
                     <Grid item xs={6} sm={2} ><Paper style={{width: '100px', height: '100px', marginTop: '15%', marginLeft: '60%'}}>
            <CardActions color='white' style={{height: '80px', marginLeft: '10%'}} >
-             <Button onClick={()=>setimg(null)} ><NotInterestedIcon /></Button>
+             <Button onClick={()=>handleBgImage(null)} ><NotInterestedIcon /></Button>
           </CardActions></Paper>
                     </Grid>
                 </Grid>

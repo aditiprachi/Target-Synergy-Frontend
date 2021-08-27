@@ -39,71 +39,80 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const ContentRanking = ({setData2, data2, handleChangeIndex, state, setState,inputList,setInputList}) => {
-//   const [state, setState] = useState({
-//     checkedA: false,
-//     checkedB: false,
-//     checkedC: false,
-//  });
+const ContentRanking = ({setData2, data2, handleChangeIndex, inputList,setInputList}) => {
+   const [state, setState] = useState({
+    checkedA: false,
+    checkedB: false,
+     checkedC: false,
+  });
 
 
 
 // handle input change
 const handleInputChange = (e, index) => {
-const { name, value } = e.target;
-const list = [...inputList];
-list[index][name] = value;
-setInputList(list);
+  console.log(inputList)
+  const list = [...inputList];
+  console.log(inputList)
+  list[index][e.target.name] = e.target.value;
+  
+  setInputList(list);
+  
+ console.log(inputList)
 };
 
 // handle click event of the Remove button
 const handleRemoveClick = index => {
-const list = [...inputList];
-list.splice(index, 1);
-setInputList(list);
+  const list = [...inputList];
+  list.splice(index, 1);
+  setInputList(list);
+  // const r = [...result];
+  // console.log(result);
+  // r.splice(index, 1);
+  // setResult(r);
 };
-
 // handle click event of the Add button
 const handleAddClick = () => {
-setInputList([...inputList, { choice: "" }]);
+  setInputList([...inputList, { option:"", votes: 0 }]);
 };
- const handleChange = (event) => {
-   setState({ ...state, [event.target.name]: event.target.checked });
- };
+    const handleChange = (event) => {
+      setState({ ...state, [event.target.name]: event.target.checked });
+    };
+  
+  const classes = useStyles();
+  const url="https://targetsynergy-backend.herokuapp.com/RT"
+ 
+  const id = useContext(IdContext)
+  const submit = (e) => {
 
-const classes = useStyles();
-const url="https://targetsynergy-backend.herokuapp.com/polls"
+    e.preventDefault();
+    // inputList.map((choicee,key)=>{
+    //   data2.option[key]=choicee.option
+    // })
 
-const id = useContext(IdContext)
-const submit = (e) => {
+    const q ={
+      question: data2.question,
+     choices: inputList,
+     googleId: "a"
+    }
+    console.log(q)
+    axios.post(url, q)
+         .then(res=>{
+            console.log(res)
+            id.setId(res.data);
+            
+          })
 
- e.preventDefault();
- inputList.map((choicee,key)=>{
-   data2.choice[key]=choicee.choice
- })
-
- const q ={
-   question: data2.question,
-  choices: data2.choice
- }
- console.log(q)
- axios.post(url, q)
-      .then(res=>{
-         console.log(res)
-         id.setId(res.data);
-         
-       })
-
-}
+  }
 
 
-function handle(e){
- const newdata={...data2}
- newdata[e.target.id]=e.target.value
- setData2(newdata)
- console.log(newdata)
+  function handle(e){
+    const newdata={...data2}
+    newdata[e.target.id]=e.target.value
+    setData2(newdata)
+    console.log(newdata)
 
-}
+  }
+
 
 
 return (
@@ -125,9 +134,9 @@ return (
        id="outlined-basic"
        style={{width: '100%'}}
          className="ml10"
-         name="choice"
+         name="option"
          placeholder="Enter Category"
-         value={x.choice}
+         value={x.option}
          onChange={e => handleInputChange(e, i)}
        />
        <div>

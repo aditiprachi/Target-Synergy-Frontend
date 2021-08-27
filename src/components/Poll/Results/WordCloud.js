@@ -3,7 +3,9 @@ import React,{useState,useEffect} from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import ReactWordcloud from 'react-wordcloud';
 import axios from 'axios'
-const id=27
+import randomColor from 'randomcolor'
+
+
 const useStyles = makeStyles((theme) => ({
     root: {
         flex: 1,
@@ -48,79 +50,95 @@ export const box = styled.div`
   height: 1%;
 
 `;
-const WordCloud = () => {
+const WordCloud = (props) => {
+    const url = props.match.params.id;
+    const [WCResponses , setWCResponses] =useState({});
+    const [resUrl, setResUrl] = useState("");
+    const [question,setquestion]=useState({question:""})
     
-  const [question,setquestion]=useState({question:""})
-   axios.get(`https://targetsynergy-backend.herokuapp.com/WordCloud/109`)
+    useEffect(async ()=>{
+      await axios.get(`https://targetsynergy-backend.herokuapp.com/WC/${url}`)
    .then(res=>{
-        
          setquestion({question:res.data.question})
-       
+        //  console.log(question);
     })
-
+    .catch((error)=>{
+      console.log(error)
+    })
+    await axios.get(`https://targetsynergy-backend.herokuapp.com/quest/${url}`)
+    .then(result => {
+      setResUrl(result.data);
+      // console.log(result.data);
+      if(resUrl !== ""){
+        axios.get(`https://targetsynergy-backend.herokuapp.com/WordCloudResponse/${resUrl}`)
+          .then(res=>{
+        // console.log(res.data)
+        setWCResponses(res.data)
+        })
+        
+    }
+    })
+    .catch(error => console.log(error))
+    
+  },[url,resUrl])
+  
+  
 const wcr=[];
-axios.get(`https://targetsynergy-backend.herokuapp.com/WordCloudResponse/611ac9536bc994626e4d6beb`)
-.then(res=>{
-    console.log(res.data)
-let i=0
-Object.entries(res.data).forEach(([key, value]) => {
-res.value = true;
-wcr[i]=({text:`${key}`, value:`${value}`})
-i++
-})
-console.log(wcr)
-})
 
-let wcrs=[...wcr]
-console.log(wcrs)
+      let i=0
+      Object.entries(WCResponses).forEach(([key, value]) => {
+      wcr[i]=({text:`${key}`, value:`${value}`})
+      // console.log(wcr[i])
+      i++
+      })
+
+ 
 
 
-const resizeStyle = {
-display: "flex",
-alignItems: "center",
-justifyContent: "center",
-border: "solid 1px #ddd",
-width: '80%',
-height: '100%',
+  const resizeStyle = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    border: "solid 1px #ddd",
+    width: '97%%',
+    height: '100%',
+    marginTop: '5%'
+  };
+  const callbacks = {
+      getWordColor: word => word.value > 50 ? randomColor({luminosity: 'bright'}) : randomColor({luminosity: 'bright'}),
+      onWordClick: console.log,
+      onWordMouseOver: console.log,
+      getWordTooltip: word => `${word.text} (${word.value}) [${word.value > 50 ? "" : ""}]`
+  }
 
-
-};
-const callbacks = {
-//getWordColor: word => word.value > 50 ? "blue" : "red",
-onWordClick: console.log,
-onWordMouseOver: console.log,
-//getWordTooltip: word => `${word.text} (${word.value}) [${word.value > 50 ? "" : ""}]`,
-}
-
-const options = {
-colors: ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b"],
-enableTooltip: true,
-deterministic: false,
-fontFamily: "helvetica",
-fontSizes: [ 20, 90],
-fontStyle: "normal",
-fontWeight: "normal",
-padding: 1,
-rotations: 2,
-rotationAngles: [0],
-scale: "sqrt",
-spiral: "archimedean",
-transitionDuration: 1000
-};
-//const size = [1200, 400];
+  const options = {
+      enableTooltip: true,
+      deterministic: false,
+      fontFamily: "helvetica",
+      fontSizes: [ 30, 100,45],
+      fontStyle: "normal",
+      fontWeight: "normal",
+      padding: 1,
+      rotations: 2,
+      rotationAngles: [0, 90, -90],
+      scale: "sqrt",
+      spiral: "archimedean",
+      transitionDuration: 1000
+  };
+  const size = [1200, 400,300];
 
 return (
 <div style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',height:'100%',width:'100%'}} >
-<h1 style={{fontFamily: "Helvetica", textAlign: 'center'}} >kk{question.question}</h1>
-
+<h1 style={{fontFamily: "Helvetica", textAlign: 'center'}} >{question.question}</h1>
 
   <div style={resizeStyle}>
-<ReactWordcloud
+  <ReactWordcloud
   callbacks={callbacks}
   options={options}
 
-  words={wcrs}
-/>
+  size={size}
+  words={wcr}
+  />
 </div>
 </div>
 );

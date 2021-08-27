@@ -12,15 +12,11 @@ const useStyles = makeStyles((theme) => ({
       '& > *': {
         margin: theme.spacing(1),
         width: '100%',
-      
       },
     },
     h:{
-      
       marginBottom: '0',
-      textAlign: 'center',
-      
-
+      textAlign: 'center'
     },
     typography: {
         // for settings

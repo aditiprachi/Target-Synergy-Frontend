@@ -10,7 +10,7 @@ function Ranking({data2, inputList, textcolor}) {
       {inputList.map((x,i)=>{
             return(
               <Box component="fieldset" mb={3} borderColor="transparent" key={i}>
-                <Typography component="legend">{inputList[i].choice}</Typography>
+                <Typography style={{color: textcolor}}>{inputList[i].option}</Typography> 
                 <Rating
                 defaultValue={0}
                 precision={0.5}

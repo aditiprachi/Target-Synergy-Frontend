@@ -11,16 +11,13 @@ const useStyles = makeStyles((theme) => ({
       '& > *': {
         margin: theme.spacing(1),
         width: '100%',
-      
       },
     },
     h:{
       fontSize: '15px',
       marginBottom: '0',
-
     },
     typography: {
-        // for settings
         fontSize: 12,
       },
     button: {

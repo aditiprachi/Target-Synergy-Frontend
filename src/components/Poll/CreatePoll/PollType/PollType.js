@@ -68,7 +68,7 @@ const PollType = ({clickHandler, handleChangeIndex}) => {
             <EqualizerIcon fontSize="large" className={classes.icon} /><h5>Multiple Choice</h5>
             </Button>
          
-          <Button value="ic" aria-label="ranking" className={classes.togglebtn} onClick={()=>{clickHandler("ranking");handleChangeIndex(1)}}>
+          <Button value="ic" aria-label="rating" className={classes.togglebtn} onClick={()=>{clickHandler("rating");handleChangeIndex(1)}}>
             <StarBorderIcon fontSize="large" className={classes.icon}/><h5>RATING</h5>
             </Button>
             

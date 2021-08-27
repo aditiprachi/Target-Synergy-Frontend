@@ -36,12 +36,12 @@ const Presentation = ({color, textcolor, component, opacity, img, data1, data2, 
                                 minHeight: '400px',
                                backgroundColor: color,
                                 opacity: opacity/100,
-                                backgroundImage: `url(${img})`,
+                                backgroundImage: `url(${img.bg})`,
                                 color: textcolor,
                     }}
                     >
                    
-        {component === 'ranking' && <Ranking data2={data2} inputList={inputListRanking}  />} 
+        {component === 'rating' && <Ranking data2={data2} inputList={inputListRanking}  />} 
         {component === 'multiplechoice' && <MultipleChoice data1={data1} result={result} inputList={inputListMC}/>  }
         {component === 'wordcloud' && <WordCloud data4={data4}/>} 
         {component === 'qanda' && <QandA data6={data6}/>} 

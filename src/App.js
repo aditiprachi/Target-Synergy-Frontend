@@ -12,9 +12,9 @@ import Vote from './components/Poll/CreatePoll/ParticipantType/Vote';
 import QandA from './components/Poll/Results/QandA';
 import QandAUser from './components/Poll/CreatePoll/ParticipantType/QandAUser';
 import ScalesUser from './components/Poll/CreatePoll/ParticipantType/ScalesUser'
-import WordCloud from './components/Poll/Results/WordCloud'
 import MCQ from './components/Poll/Results/MCQ'
 import WordCloudUser from './components/Poll/CreatePoll/ParticipantType/WordCloudUser'
+import WordCloud from './components/Poll/Results/WordCloud'
 import CreateFeedback from './components/Feedback/CreateFeedback';
 import CreateOpinions from './components/Opinions/CreateOpinions';
 import DesktopBreakpoint from './components/responsive_utilities/desktop_breakpoint';
@@ -24,6 +24,9 @@ import OpenEnded from './components/Poll/Results/OpenEnded'
 import Scales from './components/Poll/Results/Scales'
 import OpenEndedUser from './components/Poll/CreatePoll/ParticipantType/OpenEndedUser';
 import Ranking from './components/Poll/CreatePoll/PollType/Ranking';
+import RatingUser from './components/Poll/CreatePoll/ParticipantType/RatingUser'
+import Rating from './components/Poll/Results/Rating'
+
 import MultipleChoice from './components/Poll/CreatePoll/PollType/MultipleChoice';
 
 export const IdContext = React.createContext();
@@ -33,9 +36,6 @@ function App() {
   const [id, setId] = useState("");
 
   const [textBased , setTextBased] = useState({question:'', choices:[]})
- 
-  
-
   return (
     <div>
     <DesktopBreakpoint>
@@ -56,7 +56,7 @@ function App() {
           <Route path="/create-poll" render={(props)=>(<CreatePolls {...props}  contentauth={contentauth}/>)}/>
           <Route path="/create-feedback" render={(props)=>(<CreateFeedback {...props}  contentauth={contentauth}/>)}/>
           <Route path="/create-opinions" render={(props)=>(<CreateOpinions {...props}  contentauth={contentauth}/>)}/>  
-        
+          
           
         <Route path="/610fbf5066e210524c8325a5" component={Ranking}/>
           <Route
@@ -78,19 +78,11 @@ function App() {
             )}
           />
           <Route
-            path="/Ranking"
-            render={({ match: { url } }) => (
-             <Switch>
-                <Route path={`${url}/:id`} component={Ranking} exact />
-              </Switch>
-            )}
-          />
-          <Route
             path="/WC"
             render={({ match: { url } }) => (
              <Switch>
                 <Route path={`${url}/:id`} component={WordCloudUser} exact />
-                <Route exact path={`${url}/:id/results`} component={OpenEnded} /> 
+                <Route exact path={`${url}/:id/results`} component={WordCloud} /> 
               </Switch>
             )}
           />
@@ -109,6 +101,15 @@ function App() {
              <Switch>
                 <Route path={`${url}/:id`} component={ScalesUser} exact />
                 <Route exact path={`${url}/:id/results`} component={Scales} /> 
+              </Switch>
+            )}
+          />
+           <Route
+            path="/RT"
+            render={({ match: { url } }) => (
+             <Switch>
+                <Route path={`${url}/:id`} component={RatingUser} exact />
+                <Route exact path={`${url}/:id/results`} component={Rating} /> 
               </Switch>
             )}
           />
