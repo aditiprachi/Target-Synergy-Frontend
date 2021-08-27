@@ -99,21 +99,20 @@ const WordCloudUser = (props) => {
 
 
     return (
-      <Container className={classes.root} style={{ display: "flex", justifyContent: "center", alignItems: "center", height: '100%', flexDirection:'column', marginTop: '2%', width: '50%' }} >
+      <Container className={classes.root} style={{ display: "flex", justifyContent: "center", alignItems: "center", height: '100%', flexDirection:'column', paddingTop: '5%', width: '50%' }} >
            <form onSubmit={submit} className={classes.root} noValidate autoComplete="off"><h1 className={classes.h}>{question.question}</h1>
       
-     <h5>Write Your Answer Here:</h5>
+     <h3>Write Your Answer Here:</h3>
       <TextField id="outlined-multiline-static" multiline rows={4} label="Your Answer" variant="outlined" size="small" onChange={(e)=>handle(e)} id="latestAnswer" value={WCAnswer.latestAnswer} type="text" style={{width: '100%'}} />
     
-      <div style={{display: 'flex',flexDirection: 'row', width: '100%', justifyContent: 'center',alignItems: "center"}}>
+      <div style={{display: 'flex',flexDirection: 'column', width: '100%', justifyContent: 'space-evenly',alignItems: "center"}}>
      <Button
         style={{ width: "40%",background:"#cc0000", color:"white" }}
         className={classes.button}
         variant="contained"
-       // color="primary"
+        onClick = {()=>submit()}
         size="large"
         fullWidth={true}
-        onClick={()=>submit()}
       >Submit
       </Button>
       <Button
@@ -124,6 +123,7 @@ const WordCloudUser = (props) => {
         size="large"
        >View Result
       </Button></div>
+    
   
        </form>
       </Container>

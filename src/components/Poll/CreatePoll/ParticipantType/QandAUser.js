@@ -40,7 +40,7 @@ const QandAUser = (props) => {
   const u = props.match.params.id;
   const [resUrl,setResUrl] = useState("");
   const [question,setquestion]=useState({question:""})
-  axios.get(`https://targetsynergy-backend.herokuapp.com/QandA/${url}`)
+  axios.get(`https://targetsynergy-backend.herokuapp.com/QandA/${u}`)
   .then(res=>{
         setquestion({question:res.data.question})
    })
@@ -94,20 +94,19 @@ const QandAUser = (props) => {
     }
 
     return (
-      <Container className={classes.root}  style={{ display: "flex", justifyContent: "center", alignItems: "center", height: '100%', flexDirection:'column', marginTop: '2%', width: '50%' }} >
-           <form onSubmit={submit} className={classes.root} noValidate autoComplete="off"><h4 className={classes.h}>{question.question}</h4>
+      <Container className={classes.root}  style={{ display: "flex", justifyContent: "center", alignItems: "center", height: '100%', flexDirection:'column', paddingTop: '5%', width: '50%' }} >
+           <form onSubmit={submit} className={classes.root} noValidate autoComplete="off"><h1 className={classes.h}>{question.question}</h1>
       
-      <h5>Write Your Answer Here:</h5>
+      <h3>Write Your Answer Here:</h3>
       <TextField id="outlined-multiline-static" multiline rows={4} label="Your Answers" variant="outlined" size="small" onChange={(e)=>handle(e)} id="latestAnswer" value={QandAAnswer.latestAnswer} type="text" style={{width: '100%'}} />
-    <div style={{display: 'flex',flexDirection: 'row', width: '100%', justifyContent: 'center',alignItems: "center"}}>
+      <div style={{display: 'flex',flexDirection: 'column', width: '100%', justifyContent: 'space-evenly',alignItems: "center"}}>
      <Button
         style={{ width: "40%",background:"#cc0000", color:"white" }}
         className={classes.button}
         variant="contained"
-       // color="primary"
+        onClick = {()=>submit()}
         size="large"
         fullWidth={true}
-        onClick={()=>submit()}
       >Submit
       </Button>
       <Button
@@ -117,7 +116,9 @@ const QandAUser = (props) => {
         onClick={() => {handleResult(`${uri}`)}}
         size="large"
        >View Result
-      </Button></div>
+      </Button>
+      </div>
+    
   
        </form>
        </Container>

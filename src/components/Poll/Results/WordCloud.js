@@ -128,7 +128,7 @@ const wcr=[];
   const size = [1200, 400,300];
 
 return (
-<div style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',height:'100%',width:'100%'}} >
+<div style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',height:'100%',width:'100%',paddingTop:"5%"}} >
 <h1 style={{fontFamily: "Helvetica", textAlign: 'center'}} >{question.question}</h1>
 
   <div style={resizeStyle}>

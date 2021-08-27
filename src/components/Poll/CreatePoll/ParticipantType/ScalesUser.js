@@ -103,7 +103,7 @@ console.log(textBased.question)
     history.push(path);
 }
     return (
-      <div  style={{display: "flex", flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%'}}><h3 fontFamily= "Helvetica">{textBased.question}</h3>
+      <div  style={{display: "flex", flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%',paddingTop:"5%"}}><h1 fontFamily= "Helvetica">{textBased.question}</h1>
            <form onSubmit={handleClick} className={classes.root} noValidate autoComplete="off">
       
 {Answers.map((x, i) => {
@@ -111,7 +111,7 @@ console.log(textBased.question)
     return(
         <div style={{display: "flex", flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '95%', margin: '2%' }}>
       
-          <h5>{x}</h5>
+          <h3>{x}</h3>
      
             <Slider
               value={value[i]}
@@ -132,7 +132,7 @@ console.log(textBased.question)
       })}
       <div style={{display: 'flex',flexDirection: 'column', width: '100%', justifyContent: 'space-evenly',alignItems: "center"}}>
         <Button
-         style={{ width: "20%",background:"#cc0000", color:"white" }}
+         style={{ width: "40%",background:"#cc0000", color:"white" }}
          className={classes.button}
          variant="contained"
          onClick = {()=>handleClick()}
@@ -141,7 +141,7 @@ console.log(textBased.question)
       >Submit
       </Button>
       <Button
-        style={{ width: "20%",background:"#cc0000", color:"white"}}
+        style={{ width: "40%",background:"#cc0000", color:"white"}}
         className={classes.button}
         variant="contained"
         onClick={() => {handleResult(`${uri}`)}}

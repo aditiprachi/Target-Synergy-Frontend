@@ -82,7 +82,6 @@ console.log(textBased.question)
       const data5=({
         question: textBased.question,
         choices:[{option: ""},{votes: 0}],
-        googleId: "a"
       })
       Answers.map((x,i)=>{
         data5.choices[i]={option:(x), votes:((textBased.choices[i].votes + value[i])/2)}
@@ -98,15 +97,15 @@ console.log(textBased.question)
     history.push(path);
 }
     return (
-      <div  style={{display: "flex", flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%'}}><h3 fontFamily= "Helvetica">{textBased.question}</h3>
+      <div  style={{display: "flex", flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%',paddingTop:"5%"}}><h1 fontFamily= "Helvetica">{textBased.question}</h1>
            <form onSubmit={handleClick} className={classes.root} noValidate autoComplete="off">
       
 {Answers.map((x, i) => {
  
     return(
-        <div style={{display: "flex", flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '95%', margin: '2%' }}>
+        <div style={{display: "flex", flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
       
-          <h5>{x}</h5>
+          <h3>{x}</h3>
      
           <Rating
           value={value[i]}
@@ -124,14 +123,14 @@ console.log(textBased.question)
 
         );
       })}
-      <div style={{display: 'flex',flexDirection: 'column', width: '100%', justifyContent: 'space-evenly',alignItems: "center"}}>
-        <Button
-         style={{ width: "20%",background:"#cc0000", color:"white" }}
-         className={classes.button}
-         variant="contained"
-         onClick = {()=>handleClick()}
-         size="large"
-         fullWidth={true}
+      <div style={{display: 'flex',flexDirection: 'column', width: '100%', justifyContent: 'space-evenly',alignItems: "center",paddingTop:"1%"}}>
+     <Button
+        style={{ width: "20%",background:"#cc0000", color:"white" }}
+        className={classes.button}
+        variant="contained"
+        onClick = {()=>handleClick()}
+        size="large"
+        fullWidth={true}
       >Submit
       </Button>
       <Button
@@ -141,9 +140,8 @@ console.log(textBased.question)
         onClick={() => {handleResult(`${uri}`)}}
         size="large"
        >View Result
-      </Button>
-      </div>
-  
+      </Button></div>
+    
        
        
        </form>

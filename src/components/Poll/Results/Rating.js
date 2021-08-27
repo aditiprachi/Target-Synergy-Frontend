@@ -45,9 +45,9 @@ console.log(result)
 {Answers.map((x, i) => {
  
  return(
-     <div style={{display: "flex", flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '95%', margin: '2%' }}>
+     <div style={{display: "flex", flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '95%', paddingTop: '5%' }}>
    
-       <h5>{x}</h5>
+       <h3>{x}</h3>
   
        <Rating
        name="customized-empty"
