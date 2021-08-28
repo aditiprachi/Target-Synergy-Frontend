@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const Vote = (props) => {
+  const isLoggedIn = true;
   const classes=useStyles();
   const history = useHistory();
   const url =props.match.params.id;
@@ -94,14 +95,14 @@ let Answers = [...choice];
         fullWidth={true}
       >Submit
       </Button>
-      <Button
+      {isLoggedIn && <Button
         style={{ width: "20%",background:"#cc0000", color:"white"}}
         className={classes.button}
         variant="contained"
         onClick={() => {handleResult(`${uri}`)}}
         size="large"
        >View Result
-      </Button></div>
+      </Button> } </div>
     </div>
   );
 };
