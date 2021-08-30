@@ -63,7 +63,7 @@ function App() {
             path="/MCQ"
             render={({ match: { url } }) => (
              <Switch> 
-                <Route exact path={`${url}/:id`} component={Vote} />  
+                <Route exact path={`${url}/:id`} render={(props)=>(<Vote {...props}  auth={auth}/>)} />  
                 <Route exact path={`${url}/:id/results`} component={MCQ} />  
               </Switch>
             )}
