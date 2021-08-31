@@ -81,7 +81,7 @@ function App() {
             path="/WC"
             render={({ match: { url } }) => (
              <Switch>
-                <Route path={`${url}/:id`} render={(props)=>(<WordCloudUser {...props}  auth={auth}/>)} />
+                <Route path={`${url}/:id`} render={(props)=>(<WordCloudUser {...props}  auth={auth}/>)} exact />
                 <Route exact path={`${url}/:id/results`} component={WordCloud} /> 
               </Switch>
             )}
@@ -90,7 +90,7 @@ function App() {
             path="/QandA"
             render={({ match: { url } }) => (
              <Switch>
-                <Route path={`${url}/:id`} render={(props)=>(<QandAUser {...props}  auth={auth}/>)} />
+                <Route path={`${url}/:id`} render={(props)=>(<QandAUser {...props}  auth={auth}/>)} exact/>
                 <Route exact path={`${url}/:id/results`} component={QandA} /> 
               </Switch>
             )}
