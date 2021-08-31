@@ -12,6 +12,10 @@
     margin-top: 3%;
 }
 
+.accessLink{
+    margin-top: 3%;
+}
+
 .btnn{
     display: flex;
     flex-direction: row-reverse;

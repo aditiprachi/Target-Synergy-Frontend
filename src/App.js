@@ -72,7 +72,7 @@ function App() {
             path="/OE"
             render={({ match: { url } }) => (
              <Switch> 
-                <Route exact path={`${url}/:id`} component={OpenEndedUser} />  
+                <Route exact path={`${url}/:id`} render={(props)=>(<OpenEndedUser {...props}  auth={auth}/>)} />  
                 <Route exact path={`${url}/:id/results`} component={OpenEnded} /> 
               </Switch>
             )}
@@ -81,7 +81,7 @@ function App() {
             path="/WC"
             render={({ match: { url } }) => (
              <Switch>
-                <Route path={`${url}/:id`} component={WordCloudUser} exact />
+                <Route path={`${url}/:id`} render={(props)=>(<WordCloudUser {...props}  auth={auth}/>)} />
                 <Route exact path={`${url}/:id/results`} component={WordCloud} /> 
               </Switch>
             )}
@@ -90,7 +90,7 @@ function App() {
             path="/QandA"
             render={({ match: { url } }) => (
              <Switch>
-                <Route path={`${url}/:id`} component={QandAUser} exact />
+                <Route path={`${url}/:id`} render={(props)=>(<QandAUser {...props}  auth={auth}/>)} />
                 <Route exact path={`${url}/:id/results`} component={QandA} /> 
               </Switch>
             )}
@@ -99,7 +99,7 @@ function App() {
             path="/SC"
             render={({ match: { url } }) => (
              <Switch>
-                <Route path={`${url}/:id`} component={ScalesUser} exact />
+                <Route path={`${url}/:id`} render={(props)=>(<ScalesUser {...props}  auth={auth}/>)} />
                 <Route exact path={`${url}/:id/results`} component={Scales} /> 
               </Switch>
             )}
@@ -108,7 +108,7 @@ function App() {
             path="/RT"
             render={({ match: { url } }) => (
              <Switch>
-                <Route path={`${url}/:id`} component={RatingUser} exact />
+                <Route path={`${url}/:id`} render={(props)=>(<RatingUser {...props}  auth={auth}/>)}/>
                 <Route exact path={`${url}/:id/results`} component={Rating} /> 
               </Switch>
             )}

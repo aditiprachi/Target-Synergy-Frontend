@@ -24,14 +24,25 @@ const useStyles = makeStyles((theme) => ({
 const CreatePoll = () => {
     const classes = useStyles();
     const history = useHistory();
+    const linkHistory = useHistory();
     
-    function handleClick(path) {
+    function handleClickCode(path) {
        history.push(path);
-       setButtonText("Copied!");
+       setButtonText("Copied Code!");
    }
-
+   function handleClickLink(path) {
+    linkHistory.push(path);
+    setButtonTextLink("Copied Link!");
+}
+function handleClick(path) {
+    history.push(path);
+    setButtonText("Copied!");
+}
     const [isCopied, setIsCopied] = useState(false);
-    const [buttontext, setButtonText]=useState("Copy");
+    const [buttontext, setButtonText]=useState("Copy code");
+    const [buttontextLink, setButtonTextLink]=useState("Copy link");
+    const [isCopiedLink, setIsCopiedLink] = useState(false);
+
 
     const onCopyText = () => {
         setIsCopied(true);
@@ -39,9 +50,17 @@ const CreatePoll = () => {
         setIsCopied(false);
         }, 1000);
     };
+    
+    const onCopyLink = () => {
+        setIsCopiedLink(true);
+        setTimeout(() => {
+        setIsCopiedLink(false);
+        }, 1000);
+    };
     const id = useContext(IdContext);
     const uri = id.id;
     const text = `/${uri}`
+    const link = `https://targetsynergy.herokuapp.com/${uri}`
     return (
         <div className='bx'>
             
@@ -75,13 +94,13 @@ const CreatePoll = () => {
                                 <div className="copy-area">
                                 <Button
                                 variant="contained"
-                                onClick={() => {handleClick("/link") }}
+                                onClick={() => {handleClickCode("/link") }}
                                 style={
                                  {
                                     backgroundColor: "#808080",
                                     color: "white",
                                     float: "right",
-                                    margin: "5px",
+                                    margin: "7px",
                                     fontSize: '13px'
                                             
                                 }
@@ -113,6 +132,53 @@ const CreatePoll = () => {
                             
                         </div>
                     </div>
+                    
+                    <div className='accessLink'>
+                        <h2>Access Link</h2>
+                        <div className={classes.search}>
+                            <CopyToClipboard text={link} onCopy={onCopyLink} style={{float: 'right'}}>
+                                <div className="copy-area">
+                                <Button
+                                variant="contained"
+                                onClick={() => {handleClickLink("/link") }}
+                                style={
+                                 {
+                                    backgroundColor: "#808080",
+                                    color: "white",
+                                    float: "right",
+                                    margin: "5px",
+                                    fontSize: '13px'
+                                            
+                                }
+                                    }
+                                >{buttontextLink}
+                            </Button>
+                                </div>
+                            </CopyToClipboard>
+
+                            <InputBase
+                                type="text"
+                                value={link}
+                                placeholder="LINK"
+                                classes={{
+                                    root: classes.inputRoot,
+                                    input: classes.inputInput,
+                                }}
+                                inputProps={{ 'aria-label': 'Enter code' }}
+                                style={
+                                    {
+                                        border: " 1px solid black",
+                                        width: "70%",
+                                        padding: "5px",
+                                        fontSize: "1.2rem"
+                                    }
+                                }
+                                />
+                            
+                            
+                        </div>
+                    </div>
+                    
                     
                     <div className='btnn'>
                             <Button

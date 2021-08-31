@@ -75,6 +75,10 @@ let Answers = [...choice];
               console.log(res)
             })
   }
+  const [state , setState] = useState({showMessage: false})
+  function onButtonClickHandler() {
+    setState({ showMessage: !state.showMessage });
+  };
  
  
   return (
@@ -86,6 +90,7 @@ let Answers = [...choice];
       </div>
       
       <div style={{display: 'flex',flexDirection: 'column', width: '100%', justifyContent: 'space-evenly',alignItems: "center"}}>
+      {state.showMessage && <p>Submitted!</p>}
      <Button
         style={{ width: "20%",background:"#cc0000", color:"white" }}
         className={classes.button}
@@ -93,6 +98,7 @@ let Answers = [...choice];
         onClick = {()=>handleClick()}
         size="large"
         fullWidth={true}
+        onClick={onButtonClickHandler}
       >Submit
       </Button>
       {auth && <Button

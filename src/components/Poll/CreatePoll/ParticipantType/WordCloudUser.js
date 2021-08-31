@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const WordCloudUser = (props) => {
+    const auth = props.auth;
     const history = useHistory();
     const u = props.match.params.id;
     const [resUrl,setResUrl] = useState("");
@@ -96,7 +97,10 @@ const WordCloudUser = (props) => {
     function handleResult(path) {
         history.push(path);
     }
-
+    const [state , setState] = useState({showMessage: false})
+  function onButtonClickHandler() {
+    setState({ showMessage: !state.showMessage });
+  };
 
     return (
       <Container className={classes.root} style={{ display: "flex", justifyContent: "center", alignItems: "center", height: '100%', flexDirection:'column', paddingTop: '5%', width: '50%' }} >
@@ -104,7 +108,7 @@ const WordCloudUser = (props) => {
       
      <h3>Write Your Answer Here:</h3>
       <TextField id="outlined-multiline-static" multiline rows={4} label="Your Answer" variant="outlined" size="small" onChange={(e)=>handle(e)} id="latestAnswer" value={WCAnswer.latestAnswer} type="text" style={{width: '100%'}} />
-    
+      {state.showMessage && <p>Submitted!</p>}
       <div style={{display: 'flex',flexDirection: 'column', width: '100%', justifyContent: 'space-evenly',alignItems: "center"}}>
      <Button
         style={{ width: "40%",background:"#cc0000", color:"white" }}
@@ -113,16 +117,17 @@ const WordCloudUser = (props) => {
         onClick = {()=>submit()}
         size="large"
         fullWidth={true}
+        onClick={onButtonClickHandler}
       >Submit
       </Button>
-      <Button
+      { auth && <Button
         style={{ width: "40%",background:"#cc0000", color:"white"}}
         className={classes.button}
         variant="contained"
         onClick={() => {handleResult(`${uri}`)}}
         size="large"
        >View Result
-      </Button></div>
+      </Button> } </div>
     
   
        </form>

@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const QandAUser = (props) => {
+  const auth = props.auth;
   const history = useHistory();
   const u = props.match.params.id;
   const [resUrl,setResUrl] = useState("");
@@ -92,6 +93,10 @@ const QandAUser = (props) => {
     function handleResult(path) {
         history.push(path);
     }
+    const [state , setState] = useState({showMessage: false})
+  function onButtonClickHandler() {
+    setState({ showMessage: !state.showMessage });
+  };
 
     return (
       <Container className={classes.root}  style={{ display: "flex", justifyContent: "center", alignItems: "center", height: '100%', flexDirection:'column', paddingTop: '5%', width: '50%' }} >
@@ -100,6 +105,7 @@ const QandAUser = (props) => {
       <h3>Write Your Answer Here:</h3>
       <TextField id="outlined-multiline-static" multiline rows={4} label="Your Answers" variant="outlined" size="small" onChange={(e)=>handle(e)} id="latestAnswer" value={QandAAnswer.latestAnswer} type="text" style={{width: '100%'}} />
       <div style={{display: 'flex',flexDirection: 'column', width: '100%', justifyContent: 'space-evenly',alignItems: "center"}}>
+      {state.showMessage && <p>Submitted!</p>}
      <Button
         style={{ width: "40%",background:"#cc0000", color:"white" }}
         className={classes.button}
@@ -107,16 +113,17 @@ const QandAUser = (props) => {
         onClick = {()=>submit()}
         size="large"
         fullWidth={true}
+        onClick={onButtonClickHandler}
       >Submit
       </Button>
-      <Button
+      { auth && <Button
         style={{ width: "40%",background:"#cc0000", color:"white"}}
         className={classes.button}
         variant="contained"
         onClick={() => {handleResult(`${uri}`)}}
         size="large"
        >View Result
-      </Button>
+      </Button> }
       </div>
     
   
