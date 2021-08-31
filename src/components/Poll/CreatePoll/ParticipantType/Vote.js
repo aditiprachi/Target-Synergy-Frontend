@@ -31,16 +31,13 @@ const Vote = (props) => {
       var result = await axios.get(`https://targetsynergy-backend.herokuapp.com/MCQ/${url}`)
       setTextBased({
         question: result.data.question,
-        choices: result.data.choices
-        
+        choices: result.data.choices 
       })
-      
-
     },[])
     const choice=[];
     textBased.choices.map((post,key) => (
     choice[key]=({option:(post.option), votes:post.votes})
-));
+    ));
 
 let Answers = [...choice];
 // console.log(Answers);
@@ -74,11 +71,11 @@ let Answers = [...choice];
            .then(res=>{
               console.log(res)
             })
+            if (window.confirm('Your response has been successfully submitted. You will now be redirected to the homepage.   To submit another response, click Cancel ')) 
+            {
+            window.location.href='https://targetsynergy.herokuapp.com';
+            };
   }
-  const [state , setState] = useState({showMessage: false})
-  function onButtonClickHandler() {
-    setState({ showMessage: !state.showMessage });
-  };
  
  
   return (
@@ -90,7 +87,6 @@ let Answers = [...choice];
       </div>
       
       <div style={{display: 'flex',flexDirection: 'column', width: '100%', justifyContent: 'space-evenly',alignItems: "center"}}>
-      {state.showMessage && <p>Submitted!</p>}
      <Button
         style={{ width: "20%",background:"#cc0000", color:"white" }}
         className={classes.button}
@@ -98,7 +94,6 @@ let Answers = [...choice];
         onClick = {()=>handleClick()}
         size="large"
         fullWidth={true}
-        onClick={onButtonClickHandler}
       >Submit
       </Button>
       {auth && <Button
@@ -108,7 +103,7 @@ let Answers = [...choice];
         onClick={() => {handleResult(`${uri}`)}}
         size="large"
        >View Result
-      </Button> } </div>
+      </Button>} </div>
     </div>
   );
 };

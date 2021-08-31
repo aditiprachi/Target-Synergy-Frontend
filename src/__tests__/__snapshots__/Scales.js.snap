@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing Snapshot for Scales.js Renders 1`] = `
+<div>
+  <h1
+    style={
+      Object {
+        "color": Array [
+          "",
+        ],
+      }
+    }
+  />
+  <div
+    className="MuiContainer-root MuiContainer-maxWidthLg"
+  >
+    <b
+      style={
+        Object {
+          "textAlign": "left",
+        }
+      }
+    />
+    <span
+      className="MuiSlider-root WithStyles(ForwardRef(Slider))-root-1 MuiSlider-colorPrimary"
+      onMouseDown={[Function]}
+    >
+      <span
+        className="MuiSlider-rail WithStyles(ForwardRef(Slider))-rail-6"
+      />
+      <span
+        className="MuiSlider-track WithStyles(ForwardRef(Slider))-track-5"
+        style={
+          Object {
+            "left": "0%",
+            "width": "0%",
+          }
+        }
+      />
+      <input
+        type="hidden"
+        value="0"
+      />
+      <span
+        aria-orientation="horizontal"
+        aria-valuemax={100}
+        aria-valuemin={0}
+        aria-valuenow={0}
+        className="MuiSlider-thumb WithStyles(ForwardRef(Slider))-thumb-2 MuiSlider-thumbColorPrimary"
+        data-index={0}
+        onBlur={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseOver={[Function]}
+        role="slider"
+        style={
+          Object {
+            "left": "0%",
+          }
+        }
+        tabIndex={0}
+      />
+    </span>
+  </div>
+</div>
+`;

@@ -100,15 +100,16 @@ const wcr=[];
     alignItems: "center",
     justifyContent: "center",
     border: "solid 1px #ddd",
-    width: '97%%',
-    height: '100%',
-    marginTop: '5%'
+    width: '90%',
+    height: '30em',
+    marginTop: '2%',
+    padding: "1%"
   };
   const callbacks = {
       getWordColor: word => word.value > 50 ? randomColor({luminosity: 'bright'}) : randomColor({luminosity: 'bright'}),
       onWordClick: console.log,
       onWordMouseOver: console.log,
-      getWordTooltip: word => `${word.text} (${word.value}) [${word.value > 50 ? "" : ""}]`
+      getWordTooltip: word => `Total entries = ${word.value} `
   }
 
   const options = {
@@ -118,17 +119,17 @@ const wcr=[];
       fontSizes: [ 30, 100,45],
       fontStyle: "normal",
       fontWeight: "normal",
-      padding: 1,
+      padding: 2,
       rotations: 2,
-      rotationAngles: [0, 90, -90],
+      rotationAngles: [0],
       scale: "sqrt",
       spiral: "archimedean",
       transitionDuration: 1000
   };
-  const size = [1200, 400,300];
+  const size = [1200, 400,300, 200];
 
 return (
-<div style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',height:'100%',width:'100%',paddingTop:"5%"}} >
+<div style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',height:'100%',width:'100%',paddingTop:"3%"}} >
 <h1 style={{fontFamily: "Helvetica", textAlign: 'center'}} >{question.question}</h1>
 
   <div style={resizeStyle}>

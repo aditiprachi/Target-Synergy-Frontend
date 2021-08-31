@@ -190,8 +190,6 @@ const [inputListRanking, setInputListRanking] = useState([{option:"", votes: 0}]
                                 >Create Link
                             </Button>                     
                             </Container> 
-     
-       
                             <Container style={{ display: "flex", justifyContent: "space-between", alignItems: "space-between", height: '100%', flexDirection:'row',  width: '100%' }}>
 
   

@@ -43,7 +43,7 @@ const StyledMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem);
 
-export default function Service({setAuth, auth}) {
+ function Service({setAuth, auth,setContentAuth,contentauth}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -59,11 +59,12 @@ export default function Service({setAuth, auth}) {
     const data =  {
         googleId: res.profileObj.googleId,
         email: res.profileObj.email,
-        name: res.profileObj.name
-        
+        name: res.profileObj.name 
       }
-      console.log(data);
-        axios.post("https://targetsynergy-backend.herokuapp.com/newUser", data)
+      setContentAuth(data.googleId)
+      console.log(contentauth)
+      
+        axios.post("https://targetsynergy-backend.herokuapp.com/user", data)
         .then(r =>console.log("success"))
         .catch(err => { 
         console.error(err);
@@ -170,3 +171,4 @@ export default function Service({setAuth, auth}) {
     </div>
   );
 }
+export default Service

@@ -89,12 +89,10 @@ function Header({setAuth, auth, setContentAuth, contentauth}) {
             googleId: res.profileObj.googleId,
             email: res.profileObj.email,
             name: res.profileObj.name
-            
           }
           setContentAuth(data.googleId)
-          console.log(contentauth);
-          console.log(data);
-            axios.post("https://targetsynergy-backend.herokuapp.com/newUser", data)
+          console.log(data.googleId)
+            axios.post("https://targetsynergy-backend.herokuapp.com/user", data)
             .then(r =>console.log("success"))
             .catch(err => { 
             console.error(err);
@@ -123,7 +121,7 @@ function Header({setAuth, auth, setContentAuth, contentauth}) {
                     &nbsp;&nbsp;
                     <Typography className={classes.title} variant="h6" noWrap >
 
-                        <Service setAuth={setAuth}  auth={auth}/>
+                        <Service setAuth={setAuth} auth={auth} contentauth={contentauth} setContentAuth={setContentAuth}/>
 
                     </Typography>
                     <div className={classes.search}>

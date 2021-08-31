@@ -11,6 +11,7 @@ import Input from '@material-ui/core/Input';
 import { ChatVoice } from 'styled-icons/remix-line';
 import { List } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
+import randomColor from 'randomcolor';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -27,6 +28,36 @@ const useStyles = makeStyles((theme) => ({
       
     },
   }));
+  const PrettoSlider = withStyles({
+    root: {
+      color: randomColor(),
+      height: 8,
+    },
+    thumb: {
+      height: 24,
+      width: 24,
+      backgroundColor: '#fff',
+      border: '2px solid currentColor',
+      marginTop: -8,
+      marginLeft: -12,
+      '&:focus, &:hover, &$active': {
+        boxShadow: 'inherit',
+      },
+    },
+    active: {},
+    valueLabel: {
+      left: 'calc(-50% + 4px)',
+    },
+    track: {
+      height: 8,
+      borderRadius: 4,
+    },
+    rail: {
+      height: 8,
+      borderRadius: 4,
+    },
+  })(Slider);
+ 
   
   const Scales =(props) => {
     const auth = props.auth;
@@ -98,17 +129,17 @@ console.log(textBased.question)
              .then(res=>{
                 console.log(res)
               })
+              if (window.confirm('Your response has been successfully submitted. You will now be redirected to the homepage.   To submit another response, click Cancel ')) 
+              {
+              window.location.href='https://targetsynergy.herokuapp.com';
+              };
     }
     const uri = `/SC/${u}/results`
   function handleResult(path) {
     history.push(path);
 }
-const [state , setState] = useState({showMessage: false})
-  function onButtonClickHandler() {
-    setState({ showMessage: !state.showMessage });
-  };
     return (
-      <div  style={{display: "flex", flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%',paddingTop:"5%"}}><h1 fontFamily= "Helvetica">{textBased.question}</h1>
+      <div  style={{display: "flex", flexDirection: 'column', justifyContent: 'center', margin:"auto",alignItems: 'center', width: '60%', height: '100%',paddingTop:"5%"}}><h1 fontFamily= "Helvetica">{textBased.question}</h1>
            <form onSubmit={handleClick} className={classes.root} noValidate autoComplete="off">
       
 {Answers.map((x, i) => {
@@ -118,7 +149,7 @@ const [state , setState] = useState({showMessage: false})
       
           <h3>{x}</h3>
      
-            <Slider
+            <PrettoSlider
               value={value[i]}
               onChange={handleSliderChange(i)}
               aria-labelledby="input-slider"
@@ -136,19 +167,17 @@ const [state , setState] = useState({showMessage: false})
         );
       })}
       <div style={{display: 'flex',flexDirection: 'column', width: '100%', justifyContent: 'space-evenly',alignItems: "center"}}>
-      {state.showMessage && <p>Submitted!</p>}
-      <Button
-         style={{ width: "40%",background:"#cc0000", color:"white" }}
+        <Button
+         style={{ width: "20%",background:"#cc0000", color:"white" }}
          className={classes.button}
          variant="contained"
          onClick = {()=>handleClick()}
          size="large"
          fullWidth={true}
-         onClick={onButtonClickHandler}
       >Submit
       </Button>
       { auth && <Button
-        style={{ width: "40%",background:"#cc0000", color:"white"}}
+        style={{ width: "20%",background:"#cc0000", color:"white"}}
         className={classes.button}
         variant="contained"
         onClick={() => {handleResult(`${uri}`)}}

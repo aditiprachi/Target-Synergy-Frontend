@@ -44,6 +44,7 @@ const Content = ({setData1,data1, setResult, result, inputList,setInputList, han
          checkedC: false,
       });
     
+  console.log(contentauth)
       
 
   // handle input change
@@ -100,10 +101,9 @@ const Content = ({setData1,data1, setResult, result, inputList,setInputList, han
       const q ={
         question: data1.question,
         choices:data1.option,
-        googleId : a
-      
+        googleId : a,
+        type: "MCQ"
       }
-      console.log(q)
       console.log(q)
      
       axios.post(url, q)

@@ -39,13 +39,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const ContentRanking = ({setData2, data2, handleChangeIndex, inputList,setInputList}) => {
+const ContentRanking = ({setData2, data2, handleChangeIndex, inputList,setInputList, contentauth}) => {
    const [state, setState] = useState({
     checkedA: false,
     checkedB: false,
      checkedC: false,
   });
-
 
 
 // handle input change
@@ -65,10 +64,6 @@ const handleRemoveClick = index => {
   const list = [...inputList];
   list.splice(index, 1);
   setInputList(list);
-  // const r = [...result];
-  // console.log(result);
-  // r.splice(index, 1);
-  // setResult(r);
 };
 // handle click event of the Add button
 const handleAddClick = () => {
@@ -88,11 +83,13 @@ const handleAddClick = () => {
     // inputList.map((choicee,key)=>{
     //   data2.option[key]=choicee.option
     // })
-
+    const a = contentauth;
+    
     const q ={
       question: data2.question,
-     choices: inputList,
-     googleId: "a"
+      choices: inputList,
+      googleId: a,
+      type:"RT"
     }
     console.log(q)
     axios.post(url, q)

@@ -47,17 +47,13 @@ export const box = styled.div`
 
 `;
 const OpenEnded = (props) => {
-    const [OpenEndedResponses , setOpenEndedResponses] = useState({responses:[]});
-  console.log("hi")
-   
+    const [OpenEndedResponses , setOpenEndedResponses] = useState({responses:[]});   
     const classes = useStyles();
     
     return (
         <div >
             <h1 fontFamily= "Helvetica" justifyContent="left" >{props.openEnded.question}</h1>
-
-       
-    </div>
+        </div>
     );
 }
 

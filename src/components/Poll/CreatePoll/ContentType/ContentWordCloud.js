@@ -38,7 +38,14 @@ const ContentWordCloud = (props) => {
   const id = useContext(IdContext);
   const submit = (e) => {
     e.preventDefault();
-    axios.post(url, props.WC)
+    const a = props.contentauth;
+      
+      const q ={
+        question: props.WC.question,
+        googleId : a,
+        type: "WC"
+      }
+    axios.post(url, q)
          .then(res=>{
             console.log(res.data);
             id.setId(res.data);

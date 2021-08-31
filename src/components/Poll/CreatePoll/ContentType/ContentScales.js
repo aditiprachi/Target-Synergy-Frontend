@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const ContentScales = ({data5, setData5, setInputList, inputList, handleChangeIndex}) => {
+const ContentScales = ({data5, setData5, setInputList, inputList, handleChangeIndex, contentauth}) => {
      const [state, setState] = useState({
          checkedA: false,
          checkedB: false,
@@ -63,10 +63,6 @@ const ContentScales = ({data5, setData5, setInputList, inputList, handleChangeIn
     const list = [...inputList];
     list.splice(index, 1);
     setInputList(list);
-    // const r = [...result];
-    // console.log(result);
-    // r.splice(index, 1);
-    // setResult(r);
   };
  
  
@@ -88,11 +84,13 @@ const ContentScales = ({data5, setData5, setInputList, inputList, handleChangeIn
       // inputList.map((choicee,key)=>{
       //   data5.option[key]=choicee.option
       // })
+      const a = contentauth;
   
       const q ={
         question: data5.question,
        choices: inputList,
-       googleId: "a"
+       googleId: a,
+       type:"SC"
       }
       console.log(q)
       axios.post(url, q)

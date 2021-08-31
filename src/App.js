@@ -19,20 +19,16 @@ import CreateFeedback from './components/Feedback/CreateFeedback';
 import CreateOpinions from './components/Opinions/CreateOpinions';
 import DesktopBreakpoint from './components/responsive_utilities/desktop_breakpoint';
 import PhoneBreakpoint from './components/responsive_utilities/phone_breakpoint';
-//import { IdContext } from './IdContext';
 import OpenEnded from './components/Poll/Results/OpenEnded'
 import Scales from './components/Poll/Results/Scales'
 import OpenEndedUser from './components/Poll/CreatePoll/ParticipantType/OpenEndedUser';
 import Ranking from './components/Poll/CreatePoll/PollType/Ranking';
 import RatingUser from './components/Poll/CreatePoll/ParticipantType/RatingUser'
-import Rating from './components/Poll/Results/Rating'
-
-import MultipleChoice from './components/Poll/CreatePoll/PollType/MultipleChoice';
-
+import RatingResult from './components/Poll/Results/Rating'
 export const IdContext = React.createContext();
 function App() {
   const [ auth, setAuth]=useState(false)
-  const [ contentauth, setContentAuth ] =useState()
+  const [ contentauth, setContentAuth ] =useState("")
   const [id, setId] = useState("");
 
   const [textBased , setTextBased] = useState({question:'', choices:[]})
@@ -43,7 +39,88 @@ function App() {
     <div className="App">
         <Header setAuth={setAuth} auth={auth} setContentAuth={setContentAuth} contentauth={contentauth}/>
         <Switch>
-          <Route exact path="/" render={(props)=>(<Main {...props} setAuth={setAuth} auth={auth} />)} />
+          <Route exact path="/" render={(props)=>(<Main {...props} setAuth={setAuth} auth={auth} setContentAuth={setContentAuth} contentauth={contentauth}/>)} />
+         <Route path="/polls" render={(props)=>(<Poll {...props}  contentauth={contentauth}/>)}/> 
+          <Route path="/opinions" component={Opinions}/>
+          <Route path="/feedback" component={Feedback}/>
+          <IdContext.Provider
+                value={{
+                id,
+                setId
+                }}>
+          <Route path="/link" component={CreatePoll} />
+          <Route path="/create-poll" render={(props)=>(<CreatePolls {...props}  contentauth={contentauth}/>)}/>
+          <Route path="/create-feedback" render={(props)=>(<CreateFeedback {...props}  contentauth={contentauth}/>)}/>
+          <Route path="/create-opinions" render={(props)=>(<CreateOpinions {...props}  contentauth={contentauth}/>)}/>  
+          
+          
+        
+          <Route
+            path="/MCQ"
+            render={({ match: { url } }) => (
+             <Switch> 
+                <Route path={`${url}/:id`} render={(props)=>(<Vote {...props}  auth={auth}/>)} exact />  
+                <Route exact path={`${url}/:id/results`} component={MCQ} />  
+              </Switch>
+            )}
+          />
+          <Route
+            path="/OE"
+            render={({ match: { url } }) => (
+             <Switch> 
+                <Route path={`${url}/:id`} render={(props)=>(<OpenEndedUser {...props}  auth={auth}/>)} exact/>  
+                <Route exact path={`${url}/:id/results`} component={OpenEnded} /> 
+              </Switch>
+            )}
+          />
+          <Route
+            path="/WC"
+            render={({ match: { url } }) => (
+             <Switch>
+                <Route path={`${url}/:id`}  render={(props)=>(<WordCloudUser {...props}  auth={auth}/>)} exact  />
+                <Route exact path={`${url}/:id/results`} component={WordCloud} /> 
+              </Switch>
+            )}
+          />
+          <Route
+            path="/QandA"
+            render={({ match: { url } }) => (
+             <Switch>
+                <Route path={`${url}/:id`} render={(props)=>(<QandAUser {...props}  auth={auth}/>)} exact />
+                <Route exact path={`${url}/:id/results`} component={QandA} /> 
+              </Switch>
+            )}
+          />
+          <Route
+            path="/SC"
+            render={({ match: { url } }) => (
+             <Switch>
+                <Route path={`${url}/:id`} render={(props)=>(<ScalesUser {...props}  auth={auth}/>)} exact />
+                <Route exact path={`${url}/:id/results`} component={Scales} /> 
+              </Switch>
+            )}
+          />
+           <Route
+            path="/RT"
+            render={({ match: { url } }) => (
+             <Switch>
+                <Route path={`${url}/:id`} render={(props)=>(<RatingUser {...props}  auth={auth}/>)} exact />
+                <Route exact path={`${url}/:id/results`} component={RatingResult} /> 
+              </Switch>
+            )}
+          />
+         </IdContext.Provider>
+        </Switch> 
+    </div>
+    </BrowserRouter>
+    </DesktopBreakpoint>
+    <PhoneBreakpoint>
+    <BrowserRouter>
+   
+    <div className="App">
+        <Header setAuth={setAuth} auth={auth} setContentAuth={setContentAuth} contentauth={contentauth}/>
+        <Switch>
+          <Route exact path="/" render={(props)=>(<Main {...props} setAuth={setAuth} auth={auth} setContentAuth={setContentAuth} contentauth={contentauth}/>)} />
          <Route path="/polls" component={Poll}/> 
           <Route path="/opinions" component={Opinions}/>
           <Route path="/feedback" component={Feedback}/>
@@ -63,7 +140,7 @@ function App() {
             path="/MCQ"
             render={({ match: { url } }) => (
              <Switch> 
-                <Route exact path={`${url}/:id`} render={(props)=>(<Vote {...props}  auth={auth}/>)} />  
+                <Route exact path={`${url}/:id`} render={(props)=>(<Vote {...props}  auth={auth}/>)}  />  
                 <Route exact path={`${url}/:id/results`} component={MCQ} />  
               </Switch>
             )}
@@ -72,7 +149,7 @@ function App() {
             path="/OE"
             render={({ match: { url } }) => (
              <Switch> 
-                <Route exact path={`${url}/:id`} render={(props)=>(<OpenEndedUser {...props}  auth={auth}/>)} />  
+                <Route exact path={`${url}/:id`} render={(props)=>(<OpenEndedUser {...props}  auth={auth}/>)}  />  
                 <Route exact path={`${url}/:id/results`} component={OpenEnded} /> 
               </Switch>
             )}
@@ -81,7 +158,7 @@ function App() {
             path="/WC"
             render={({ match: { url } }) => (
              <Switch>
-                <Route path={`${url}/:id`} render={(props)=>(<WordCloudUser {...props}  auth={auth}/>)} exact />
+                <Route path={`${url}/:id`} render={(props)=>(<WordCloudUser {...props}  auth={auth}/>)}  />
                 <Route exact path={`${url}/:id/results`} component={WordCloud} /> 
               </Switch>
             )}
@@ -90,7 +167,7 @@ function App() {
             path="/QandA"
             render={({ match: { url } }) => (
              <Switch>
-                <Route path={`${url}/:id`} render={(props)=>(<QandAUser {...props}  auth={auth}/>)} exact/>
+                <Route path={`${url}/:id`} render={(props)=>(<QandAUser {...props}  auth={auth}/>)} />
                 <Route exact path={`${url}/:id/results`} component={QandA} /> 
               </Switch>
             )}
@@ -99,7 +176,7 @@ function App() {
             path="/SC"
             render={({ match: { url } }) => (
              <Switch>
-                <Route path={`${url}/:id`} render={(props)=>(<ScalesUser {...props}  auth={auth}/>)} />
+                <Route path={`${url}/:id`} render={(props)=>(<ScalesUser {...props}  auth={auth}/>)}  />
                 <Route exact path={`${url}/:id/results`} component={Scales} /> 
               </Switch>
             )}
@@ -108,52 +185,12 @@ function App() {
             path="/RT"
             render={({ match: { url } }) => (
              <Switch>
-                <Route path={`${url}/:id`} render={(props)=>(<RatingUser {...props}  auth={auth}/>)}/>
-                <Route exact path={`${url}/:id/results`} component={Rating} /> 
+                <Route path={`${url}/:id`} render={(props)=>(<RatingUser {...props}  auth={auth}/>)}  />
+                <Route exact path={`${url}/:id/results`} component={RatingResult} /> 
               </Switch>
             )}
           />
          </IdContext.Provider>
-        </Switch> 
-    </div>
-    </BrowserRouter>
-    </DesktopBreakpoint>
-    <PhoneBreakpoint>
-    <BrowserRouter>
-   
-    <div className="App">
-        <Header />
-        <Switch>
-          <Route exact path="/" component={Main} />
-          <Route path="/polls" component={Poll}/>
-          <Route path="/opinions" component={Opinions}/>
-          <Route path="/feedback" component={Feedback}/>
-          <Route path="/link" component={CreatePoll}/> 
-          <Route
-            path="/create-poll"
-            render={({ match: { url } }) => (
-             <Switch>
-                <Route path={`${url}/`} component={CreatePolls} exact />
-              </Switch>
-            )}
-          />
-          <Route
-            path="/create-feedback"
-            render={({ match: { url } }) => (
-             <Switch>
-                <Route path={`${url}/`} component={CreateFeedback} exact />
-              </Switch>
-            )}
-          />
-          <Route
-            path="/create-opinions"
-            render={({ match: { url } }) => (
-             <Switch>
-                <Route path={`${url}/`} component={CreateOpinions} exact />
-              </Switch>
-            )}
-          />
-          <Route path="/231" component={OpenEndedUser}/>
         </Switch> 
     </div>
     </BrowserRouter>

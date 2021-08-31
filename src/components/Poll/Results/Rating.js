@@ -1,13 +1,29 @@
 import React,{useEffect,useState } from 'react'
 import axios from "axios";
+import Rating from '@material-ui/lab/Rating';
+import { makeStyles } from '@material-ui/core/styles';
 
 
 
-const Rating =(props) => {
-    console.log(props)
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+    height: '100%'
+  },
+  input: {
+    width: 20,
+  },
+  button: {
+    margin: theme.spacing(1),
+    borderRadius: "2em",
+    
+  },
+}));
+
+const RatingResult =(props) => {
+  const classes = useStyles();
+
   const url =props.match.params.id;
- 
- 
   const [textBased , setTextBased] = useState({question:'', choices:[]})
     useEffect(async () => {
       var result = await axios.get(`https://targetsynergy-backend.herokuapp.com/RT/${url}`)
@@ -16,55 +32,36 @@ const Rating =(props) => {
        choices: result.data.choices
         
       })
-      
-
     },[])
-    const choice=[];
-    const result=[]
-    textBased.choices.map((post,key) => (
-    choice[key]=((post.option))
-)
-
-);
-textBased.choices.map((post,key) => (
-    result[key]=((post.votes))
-));
-console.log(choice)
-let Answers = [...choice];
- console.log(Answers);
-console.log(textBased.question)
-console.log(result)
-  return (
-    <div>
-        <div className='header' >
-          <h1 className='title'>{textBased.question}</h1>
-          <div className='links'>
-          </div>
-        </div>
-          
-{Answers.map((x, i) => {
- 
- return(
-     <div style={{display: "flex", flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '95%', paddingTop: '5%' }}>
-   
-       <h3>{x}</h3>
-  
-       <Rating
-       name="customized-empty"
-       value={result[i]}
-      
-       precision={0.5}
-       
-         
-       
-     />
     
+    return (
+      <div  style={{display: "flex", flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%',paddingTop:"5%"}}  className={classes.root}><h1 fontFamily= "Helvetica">{textBased.question}</h1>
+           
+      
+{textBased.choices.map((x, i) => {
+ 
+    return(
+        <div style={{display: "flex", flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
+      
+          <h3>{x.option}</h3>
+     
+          <Rating
+          value={x.votes}
+         readOnly
+          precision={0.25}
+          
+            
+          
+        />
        
+          
 </div>
-     );
-   })}   
-        
-    </div>
-  )
-}
-export default Rating
+
+           
+
+        );
+      })}
+      </div>
+    );
+  }
+export default RatingResult

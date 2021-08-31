@@ -57,12 +57,13 @@ const Background=({parentCallback, color, setOpacity, opacity, togglePopup, text
       };
      const url="https://targetsynergy-backend.herokuapp.com/MCQ"
       const id = useContext(IdContext);
+      console.log(id)
     const submit=(e)=>{
       e.preventDefault();
      const q={
        bgcolor: color,
        textcolor: textcolor,
-       opacity: opacity/100,
+       opacity: opacity,
        bgimagekey: BackgroundImage.key
      }
       axios.put(url, q)
@@ -143,7 +144,7 @@ const Background=({parentCallback, color, setOpacity, opacity, togglePopup, text
           />%
         </Grid>
         </Grid>
-        <Button >Submit</Button>
+        <Button onClick={submit} >Submit</Button>
         </div>
     )
 }

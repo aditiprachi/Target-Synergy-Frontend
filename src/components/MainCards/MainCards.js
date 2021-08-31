@@ -22,7 +22,7 @@ const useStyles = makeStyles({
     borderSpacing: 2
   },
 });
-function MainCards({setAuth,auth}) {
+function MainCards({setAuth,auth,setContentAuth,contentauth}) {
   const classes = useStyles();
   
   const onSuccess = (res)=>{
@@ -33,8 +33,10 @@ function MainCards({setAuth,auth}) {
         name: res.profileObj.name
         
       }
-      console.log(data);
-        axios.post("https://targetsynergy-backend.herokuapp.com/newUser", data)
+      setContentAuth(data.googleId)
+      console.log(contentauth)
+
+        axios.post("https://targetsynergy-backend.herokuapp.com/user", data)
         .then(r =>console.log("success"))
         .catch(err => { 
         console.error(err);
