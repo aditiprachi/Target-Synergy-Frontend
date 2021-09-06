@@ -110,10 +110,12 @@ const Content = ({setData1,data1, setResult, result, inputList,setInputList, han
            .then(res=>{
               console.log(res)
               id.setId(res.data);
-              console.log(id.id);
+              console.log(id);
             })
           
-      {handleChangeIndex(2)}}
+      }
+      {handleChangeIndex(2)}
+
     }
 
 

@@ -55,11 +55,22 @@ const WordCloud = (props) => {
     const [WCResponses , setWCResponses] =useState({});
     const [resUrl, setResUrl] = useState("");
     const [question,setquestion]=useState({question:""})
+    const [Background, setBackground]=useState({
+      bgcolor: 'white',
+      textcolor: 'black',
+      opacity: 100,
+    })
     
     useEffect(async ()=>{
       await axios.get(`https://targetsynergy-backend.herokuapp.com/WC/${url}`)
    .then(res=>{
          setquestion({question:res.data.question})
+         const update={...Background, 
+          bgcolor: res.data.bg.bgColor,
+           textcolor: res.data.bg.textColor,
+           opacity: (res.data.bg.opacity/10)*0.1
+        }
+        setBackground(update)
         //  console.log(question);
     })
     .catch((error)=>{
@@ -74,6 +85,7 @@ const WordCloud = (props) => {
           .then(res=>{
         // console.log(res.data)
         setWCResponses(res.data)
+       
         })
         
     }
@@ -102,11 +114,14 @@ const wcr=[];
     border: "solid 1px #ddd",
     width: '90%',
     height: '30em',
-    marginTop: '2%',
-    padding: "1%"
+    marginTop: '1%',
+    padding: "1%",
+    backgroundColor: Background.bgcolor,
+    opacity:  Background.opacity,
+    color: Background.textcolor
   };
   const callbacks = {
-      getWordColor: word => word.value > 50 ? randomColor({luminosity: 'bright'}) : randomColor({luminosity: 'bright'}),
+      getWordColor: word => word.value > 50 ? randomColor({luminosity: 'dark'}) : randomColor({luminosity: 'dark'}),
       onWordClick: console.log,
       onWordMouseOver: console.log,
       getWordTooltip: word => `Total entries = ${word.value} `
@@ -129,10 +144,14 @@ const wcr=[];
   const size = [1200, 400,300, 200];
 
 return (
-<div style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',height:'100%',width:'100%',paddingTop:"3%"}} >
-<h1 style={{fontFamily: "Helvetica", textAlign: 'center'}} >{question.question}</h1>
+  <div>
+    <div >
+<div style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',height:'100%',width:'100%',paddingTop:"1em"}} >
 
-  <div style={resizeStyle}>
+<h1 style={{fontFamily: "Helvetica", textAlign: 'center',fontSize:"3em"}} >{question.question}</h1>
+
+
+  <div style={resizeStyle} >
   <ReactWordcloud
   callbacks={callbacks}
   options={options}
@@ -140,6 +159,8 @@ return (
   size={size}
   words={wcr}
   />
+</div>
+</div>
 </div>
 </div>
 );

@@ -55,16 +55,18 @@ const BackgroundScales=({parentCallback, color, setOpacity, opacity, togglePopup
           setOpacity(100);
         }
       };
-     const url="https://targetsynergy-backend.herokuapp.com/polls"
       const id = useContext(IdContext);
+      const url=`https://targetsynergy-backend.herokuapp.com/${id.id}/bg`
+
     const submit=(e)=>{
       e.preventDefault();
      const q={
-       bgcolor: color,
-       textcolor: textcolor,
-       opacity: opacity/100,
-       bgimagekey: BackgroundImage.key
+       bgColor: color,
+       textColor: textcolor,
+       opacity: opacity
+       
      }
+     console.log(q)
       axios.put(url, q)
          .then(res=>{
             console.log(res.data);
@@ -143,7 +145,15 @@ const BackgroundScales=({parentCallback, color, setOpacity, opacity, togglePopup
           />%
         </Grid>
         </Grid>
-        <Button >Submit</Button>
+        <h2></h2>
+        <Button
+        style={{ width: "100%",background:"#cc0000", color:"white" }}
+        variant="contained"
+        size="large"
+        fullWidth={true}
+        onClick={submit}
+      >Submit
+      </Button>
         </div>
     )
 }

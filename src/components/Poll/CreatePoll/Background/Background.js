@@ -8,11 +8,12 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { SliderPicker } from 'react-color'
 import { IdContext } from '../../../../App';
+import { useHistory } from 'react-router';
 
 import axios from 'axios'
 
 
-const Background=({parentCallback, color, setOpacity, opacity, togglePopup, textcolor, changecolor, BackgroundImage}) => {
+const Background=({parentCallback, color, setOpacity, opacity, togglePopup, textcolor, changecolor}) => {
   
   const [showColorPicker, setShowColorPicker] = useState(false)    
   
@@ -55,22 +56,31 @@ const Background=({parentCallback, color, setOpacity, opacity, togglePopup, text
           setOpacity(100);
         }
       };
-     const url="https://targetsynergy-backend.herokuapp.com/MCQ"
+    // const url=`http://localhost:8080/MCQbg/{u}`
       const id = useContext(IdContext);
       console.log(id)
+      
     const submit=(e)=>{
       e.preventDefault();
+      console.log(id.id)
+      const url=`https://targetsynergy-backend.herokuapp.com/${id.id}/bg`
      const q={
-       bgcolor: color,
-       textcolor: textcolor,
-       opacity: opacity,
-       bgimagekey: BackgroundImage.key
-     }
-      axios.put(url, q)
+       bgColor: color,
+       textColor: textcolor,
+       opacity: opacity
+           }
+    console.log((q))
+  
+
+
+    axios.put(url, q)
          .then(res=>{
             console.log(res.data);
             id.setId(res.data);
             console.log(id.id);
+          })
+          .catch(err=>{
+            console.log(err.response)
           })
     }
 
@@ -144,7 +154,15 @@ const Background=({parentCallback, color, setOpacity, opacity, togglePopup, text
           />%
         </Grid>
         </Grid>
-        <Button onClick={submit} >Submit</Button>
+        <h2></h2>
+        <Button
+        style={{ width: "100%",background:"#cc0000", color:"white" }}
+        variant="contained"
+        size="large"
+        fullWidth={true}
+        onClick={submit}
+      >Submit
+      </Button>
         </div>
     )
 }

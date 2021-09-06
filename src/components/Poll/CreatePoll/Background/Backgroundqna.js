@@ -55,21 +55,25 @@ const Backgroundqna=({parentCallback, color, setOpacity, opacity, togglePopup, t
           setOpacity(100);
         }
       };
-     const url="https://targetsynergy-backend.herokuapp.com/QandA"
       const id = useContext(IdContext);
+      console.log(id)
     const submit=(e)=>{
       e.preventDefault();
      const q={
-       bgcolor: color,
-       textcolor: textcolor,
-       opacity: opacity/100,
-       bgimagekey: BackgroundImage.key
+       bgColor: color,
+       textColor: textcolor,
+       opacity: opacity
      }
+     const url=`https://targetsynergy-backend.herokuapp.com/${id.id}/bg`
+     console.log(url)
       axios.put(url, q)
          .then(res=>{
             console.log(res.data);
             id.setId(res.data);
             console.log(id.id);
+          })
+          .catch(err=>{
+            console.log(err.response)
           })
     }
 
@@ -143,7 +147,15 @@ const Backgroundqna=({parentCallback, color, setOpacity, opacity, togglePopup, t
           />%
         </Grid>
         </Grid>
-        <Button >Submit</Button>
+        <h2></h2>
+        <Button
+        style={{ width: "100%",background:"#cc0000", color:"white" }}
+        variant="contained"
+        size="large"
+        fullWidth={true}
+        onClick={submit}
+      >Submit
+      </Button>
         </div>
     )
 }

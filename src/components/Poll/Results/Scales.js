@@ -13,12 +13,12 @@ const useStyles = makeStyles((theme) => ({
     color: randomColor({luminosity: 'bright'})
   },
   root: {
-    width: 300 + theme.spacing(3) * 2,
+    width: '100%',
     
   },
 
   margin: {
-    height: theme.spacing(3),
+    height: theme.spacing('100%'),
   },
 
 }));
@@ -27,6 +27,11 @@ const useStyles = makeStyles((theme) => ({
 
 const Scales =(props) => {
   const classes = useStyles();
+  const [Background, setBackground]=useState({
+    bgcolor: 'white',
+    textcolor: 'black',
+    opacity: 100,
+  })
   const url =props.match.params.id;
   const [textBased , setTextBased] = useState({question:'', choices:[]})
   useEffect(async () => {
@@ -36,16 +41,29 @@ const Scales =(props) => {
      choices: result.data.choices
       
     })
+    const update={...Background, 
+      bgcolor: result.data.bg.bgColor,
+       textcolor: result.data.bg.textColor,
+       opacity: (result.data.bg.opacity/10)*0.1
+    }
+    setBackground(update)
   },[])
 
   return (
-    <div  style={{display: "flex", flexDirection: 'column', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%',paddingTop:"5%"}} ><h1 fontFamily= "Helvetica">{textBased.question}</h1>
+    <div style={{
+      backgroundColor: Background.bgcolor,
+      opacity:  Background.opacity,
+      color: Background.textcolor,
+      width: '100%',
+      height:'100%'}}>
+    <div>
+    <div  style={{display: "flex", flexDirection: 'column', justifyContent: 'center', alignItems: 'center',margin:"auto", width: '60%', height: '40em', paddingTop:"1.5em"}} ><h1 fontFamily= "Helvetica">{textBased.question}</h1>
            
       
 {textBased.choices.map((x, i) => {
   const PrettoSlider = withStyles({
     root: {
-      color: randomColor(),
+      color: randomColor({luminosity: 'dark'}),
       height: 8,
     },
     thumb: {
@@ -83,11 +101,10 @@ const Scales =(props) => {
        
           
 </div>
-
-           
-
         );
       })}
+      </div>
+      </div>
       </div>
     );
   }

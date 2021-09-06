@@ -54,10 +54,13 @@ const ContentOpenEnded = (props) => {
            .then(res=>{
               console.log(res.data);
               id.setId(res.data);
-              console.log(id.id);
+              console.log(id);
             })
 
+      handleChangeIndex(2)
+            
     }
+    
     
     function handle(e){
       const newdata={...props.OpenEnded}
@@ -82,7 +85,7 @@ const ContentOpenEnded = (props) => {
        // color="primary"
         size="large"
         fullWidth={true}
-        onClick={(e)=>{handleChangeIndex(2);submit(e)}}
+        onClick={(e)=> submit(e)}
       >Submit
       </Button>
   

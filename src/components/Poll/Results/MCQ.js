@@ -11,7 +11,6 @@ const MCQ = (props) => {
     bgcolor: 'white',
     textcolor: 'black',
     opacity: 100,
-    bgimagekey: null
   })
   
   const data = {
@@ -63,11 +62,12 @@ const MCQ = (props) => {
     let result = await axios.get(`https://targetsynergy-backend.herokuapp.com/MCQ/${url}`)
     setQuestion(result.data.question)
     setChoices(result.data.choices)
+    console.log(result.data.bg)
+
     const update={...Background, 
-      bgcolor: result.data.bgcolor,
-       textcolor: result.data.textcolor,
-       opacity: result.data.opacity,
-       bgimagekey: result.data.bgimagekey
+      bgcolor: result.data.bg.bgColor,
+       textcolor: result.data.bg.textColor,
+       opacity:  (result.data.bg.opacity/10)*0.1
     }
     setBackground(update)
   },[])
@@ -75,24 +75,24 @@ const MCQ = (props) => {
   choices.map((post,key) => (data.labels[key]=(post.option)))
   choices.map((post,key) => (data.datasets[0].data[key]=(post.votes)))
   
-  
+  console.log(Background.opacity)
+
   return (
     <div>
-        <div className='header' style={{
+       
+       <div style={{
           backgroundColor: Background.bgcolor,
-          opacity: Background.opacity/100,
-          color: Background.textcolor
-
-        }}>
+          opacity: Background.opacity,
+          color: Background.textcolor,
+          width: '100%',
+          height:'100%'}}>
           <h1 className='title'>{question}</h1>
-          <div className='links'>
-          </div>
-        </div>
-        <div style={{width : "50%" , margin:"auto"}}>
+        <div>
         <Bar data={data} options={options} />
         </div>
-        
-    </div>
+        </div>
+      
+        </div>
   )
 }
 

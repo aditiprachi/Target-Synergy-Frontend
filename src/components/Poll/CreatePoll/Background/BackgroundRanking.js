@@ -13,7 +13,7 @@ import axios from 'axios'
 
 
 const BackgroundRanking=({parentCallback, color, setOpacity, opacity, togglePopup, textcolor, changecolor, BackgroundImage}) => {
-  
+  console.log("entered")
   const [showColorPicker, setShowColorPicker] = useState(false)    
   
     const useStyles = makeStyles((theme) => ({
@@ -55,21 +55,25 @@ const BackgroundRanking=({parentCallback, color, setOpacity, opacity, togglePopu
           setOpacity(100);
         }
       };
-    const url="https://targetsynergy-backend.herokuapp.com/"
       const id = useContext(IdContext);
+      const url=`https://targetsynergy-backend.herokuapp.com/${id.id}/bg`
+
     const submit=(e)=>{
       e.preventDefault();
      const q={
-       bgcolor: color,
-       textcolor: textcolor,
-       opacity: opacity/100,
-       bgimagekey: BackgroundImage.key
+       bgColor: color,
+       textColor: textcolor,
+       opacity: opacity
      }
+     console.log(q)
       axios.put(url, q)
          .then(res=>{
             console.log(res.data);
             id.setId(res.data);
             console.log(id.id);
+          })
+          .catch(err=>{
+            console.log(err.rsesponse)
           })
     }
 
@@ -143,7 +147,15 @@ const BackgroundRanking=({parentCallback, color, setOpacity, opacity, togglePopu
           />%
         </Grid>
         </Grid>
-        <Button >Submit</Button>
+        <h2></h2>
+        <Button
+        style={{ width: "100%",background:"#cc0000", color:"white" }}
+        variant="contained"
+        size="large"
+        fullWidth={true}
+        onClick={submit}
+      >Submit
+      </Button>
         </div>
     )
 }

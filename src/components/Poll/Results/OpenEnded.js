@@ -48,15 +48,23 @@ const OpenEnded = (props) => {
   const [OpenEndedResponses , setOpenEndedResponses] =useState({responses:[]});
   const [resUrl, setResUrl] = useState("");
   const [question,setquestion]=useState({question:""})
+  const [Background, setBackground]=useState({
+    bgcolor: 'white',
+    textcolor: 'black',
+    opacity: 100,
+  })
 
-  
-
-    
       useEffect(async ()=>{
         await axios.get(`https://targetsynergy-backend.herokuapp.com/OE/${url}`)
                     .then(res=>{
                       setquestion({question:res.data.question})
-                       console.log(question);
+                       console.log(res.data);
+                       const update={...Background, 
+                        bgcolor: res.data.bg.bgColor,
+                         textcolor: res.data.bg.textColor,
+                         opacity: (res.data.bg.opacity/10)*0.1
+                      }
+                      setBackground(update)
                    })
                   .catch((error)=>{
                     console.log(error)
@@ -76,22 +84,24 @@ const OpenEnded = (props) => {
  
     },[url,resUrl])
         
-      
-    
-    
+
     const choice=OpenEndedResponses.responses;
     const classes = useStyles();
     
     return (
+      <div style={{
+        backgroundColor: Background.bgcolor,
+        opacity:  Background.opacity,
+        color: Background.textcolor,
+        width: '100%',
+        height:'100%'}}>
       <div>
-        {/* {choice.map((post,key) => {
-  console.log(post);
-})} */}
-      <div> <h1 style={{ marginTop:"50px", fontFamily:"Helvetica",  textAlign:"center", fontSize:"30px"}} >{question.question} </h1></div>
-     <div style={{justifyContent: 'space-evenly',display: 'flex', flexWrap: 'wrap', width: '70%',margin:"auto"}} >
-           {choice.map((x, i) => {
-           const color = randomColor({luminosity:"bright"});
-      return(
+      <div  style={{display: "flex", flexDirection: 'column', alignItems: 'center',margin:"auto", width: '60%', height: '40em',paddingTop:"2em"}} >
+        <h1 fontFamily= "Helvetica">{question.question}</h1>
+        <div style={{justifyContent: 'space-evenly',display: 'flex', flexWrap: 'wrap'}} >
+            {choice.map((x, i) => {
+            const color = randomColor({luminosity:"bright"});
+        return(
          
          <Container style={{padding:"1%"}}>
             <Box color="white" bgcolor={color} p={2} fontFamily= "Helvetica" style={{ backgroundColor:{color}, width: '100%'}} >
@@ -103,6 +113,9 @@ const OpenEnded = (props) => {
       })} 
       </div>
       </div>
+      </div>
+      </div>
+      
     );
 }
 

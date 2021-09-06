@@ -8,12 +8,12 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { SliderPicker } from 'react-color'
 import { IdContext } from '../../../../App';
-
+import { useHistory } from 'react-router';
 import axios from 'axios'
 
 
-const BgOpenended=({parentCallback, color, setOpacity, opacity, togglePopup, textcolor, changecolor, BackgroundImage}) => {
-  
+const BgOpenended=({parentCallback, color, setOpacity, opacity, togglePopup, textcolor, changecolor}) => {
+ 
   const [showColorPicker, setShowColorPicker] = useState(false)    
   
     const useStyles = makeStyles((theme) => ({
@@ -56,20 +56,25 @@ const BgOpenended=({parentCallback, color, setOpacity, opacity, togglePopup, tex
         }
       };
      const url="https://targetsynergy-backend.herokuapp.com/OE"
-      const id = useContext(IdContext);
+     const id = useContext(IdContext);
+     console.log(id)
     const submit=(e)=>{
       e.preventDefault();
-     const q={
-       bgcolor: color,
-       textcolor: textcolor,
-       opacity: opacity/100,
-       bgimagekey: BackgroundImage.key
+      console.log(id.id)
+      const url=`https://targetsynergy-backend.herokuapp.com0/${id.id}/bg`
+      const q={
+       bgColor: color,
+       textColor: textcolor,
+       opacity: opacity
      }
-      axios.put(url, q)
+     axios.put(url, q)
          .then(res=>{
             console.log(res.data);
             id.setId(res.data);
             console.log(id.id);
+          })
+          .catch(err=>{
+            console.log(err.response)
           })
     }
 
@@ -143,7 +148,15 @@ const BgOpenended=({parentCallback, color, setOpacity, opacity, togglePopup, tex
           />%
         </Grid>
         </Grid>
-        <Button >Submit</Button>
+        <h2></h2>
+        <Button
+        style={{ width: "100%",background:"#cc0000", color:"white" }}
+        variant="contained"
+        size="large"
+        fullWidth={true}
+        onClick={submit}
+      >Submit
+      </Button>
         </div>
     )
 }

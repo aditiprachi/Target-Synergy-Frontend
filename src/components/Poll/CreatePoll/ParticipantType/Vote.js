@@ -34,12 +34,7 @@ const Vote = (props) => {
         choices: result.data.choices 
       })
     },[])
-    const choice=[];
-    textBased.choices.map((post,key) => (
-    choice[key]=({option:(post.option), votes:post.votes})
-    ));
-
-let Answers = [...choice];
+let Answers = textBased.choices
 // console.log(Answers);
   const pollQuestion = textBased.question;
   const handleVote = (voteAnswer) => {

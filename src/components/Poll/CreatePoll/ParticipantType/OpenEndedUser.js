@@ -60,7 +60,7 @@ const ContentOpenEndedAnswerUser = (props) => {
      
     
     const classes = useStyles();
-    const url=`http://localhost:8080/responses`
+    const url=`https://targetsynergy-backend.herokuapp.com/responses`
     
     const submit = () => {
      const q ={

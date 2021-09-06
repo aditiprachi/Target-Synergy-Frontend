@@ -154,13 +154,10 @@ console.log(textBased.question)
               onChange={handleSliderChange(i)}
               aria-labelledby="input-slider"
               valueLabelDisplay="on"
-    
-           
-            
             />
        
           
-</div>
+        </div>
         
            
 

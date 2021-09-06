@@ -51,10 +51,20 @@ const QandA = (props) => {
   const [resUrl, setResUrl] = useState("");
   const [question,setquestion]=useState({question:""})
  
-  
+  const [Background, setBackground]=useState({
+    bgcolor: 'white',
+    textcolor: 'black',
+    opacity: 100,
+  })  
       useEffect(async ()=>{
         await axios.get(`https://targetsynergy-backend.herokuapp.com/QandA/${url}`)
         .then(res=>{
+          const update={...Background, 
+            bgcolor: res.data.bg.bgColor,
+             textcolor: res.data.bg.textColor,
+             opacity: (res.data.bg.opacity/10)*0.1
+          }
+          setBackground(update)
              setquestion({question:res.data.question})
             })
          .catch((error)=>{
@@ -81,13 +91,21 @@ const QandA = (props) => {
           const choice=QandAResponses.responses;
          const classes = useStyles();
     
-    return ( <div>
-     <div> <h1 style={{ marginTop:"50px", fontFamily:"Helvetica",  textAlign:"center", fontSize:"30px"}} >{question.question} </h1></div>
-     <div style={{justifyContent: 'space-evenly',display: 'flex', flexWrap: 'wrap', width: '70%',margin:"auto"}} >
+    return ( 
+      <div style={{
+        backgroundColor: Background.bgcolor,
+        opacity:  Background.opacity,
+        color: Background.textcolor,
+        width: '100%',
+        height:'100%'}}>
+      <div>
+      <div  style={{display: "flex", flexDirection: 'column', alignItems: 'center',margin:"auto", width: '60%', height: '40em',paddingTop:"2em"}} >
+        <h1 fontFamily= "Helvetica">{question.question}</h1>
+     <div style={{justifyContent: 'space-evenly',display: 'flex', flexWrap: 'wrap'}} >
            {choice.map((x, i) => {
          const color = randomColor({luminosity:"bright"});
     return(
-       
+     
        <Container style={{padding:"1%"}}>
          
 
@@ -95,9 +113,10 @@ const QandA = (props) => {
               {x}
                 </Box>
                </Container>
-       
     )
     })}
+    </div>
+    </div>
     </div>
     </div>
     );
