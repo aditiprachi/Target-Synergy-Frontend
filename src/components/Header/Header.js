@@ -92,7 +92,12 @@ function Header({setAuth, auth, setContentAuth, contentauth}) {
             name: res.profileObj.name
           }
           setContentAuth(data.googleId)
-          setName(data.name)
+          axios.get(`https://targetsynergy-backend.herokuapp.com/user/${data.googleId}`)
+            .then(res=>{
+                console.log(res.data)
+                setName(res.data.name)
+            })
+          
           console.log(data.googleId)
             axios.post("https://targetsynergy-backend.herokuapp.com/user", data)
             .then(r =>console.log("success"))
@@ -176,7 +181,7 @@ function Header({setAuth, auth, setContentAuth, contentauth}) {
                                     </GoogleLogin>
                                      </IconButton>
                                      }
-                                     { auth && <User setAuth={setAuth} />}
+                                    { auth && <User setAuth={setAuth} setName={setName} />}
 
                                     {/* <GoogleLogout
                                         clientId="4565827063-vh8t8cgckg74git2dh3ulfq7fvd02gai.apps.googleusercontent.com"
