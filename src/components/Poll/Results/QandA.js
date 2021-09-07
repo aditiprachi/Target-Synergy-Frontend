@@ -59,6 +59,8 @@ const QandA = (props) => {
       useEffect(async ()=>{
         await axios.get(`https://targetsynergy-backend.herokuapp.com/QandA/${url}`)
         .then(res=>{
+          setquestion({question:res.data.question})
+          console.log(res.data);
           const update={...Background, 
             bgcolor: res.data.bg.bgColor,
              textcolor: res.data.bg.textColor,
