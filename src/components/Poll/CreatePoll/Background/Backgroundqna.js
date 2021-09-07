@@ -77,6 +77,11 @@ const Backgroundqna=({parentCallback, color, setOpacity, opacity, togglePopup, t
           })
     }
 
+    const [state , setState] = useState({showMessage: false})
+    function onButtonClickHandler() {
+      setState({ showMessage: !state.showMessage });
+    };
+
     return (
         <div >
           
@@ -148,12 +153,14 @@ const Backgroundqna=({parentCallback, color, setOpacity, opacity, togglePopup, t
         </Grid>
         </Grid>
         <h2></h2>
+        {state.showMessage && <p>Submitted!</p>}
         <Button
         style={{ width: "100%",background:"#cc0000", color:"white" }}
         variant="contained"
         size="large"
         fullWidth={true}
         onClick={submit}
+        onClick={onButtonClickHandler}
       >Submit
       </Button>
         </div>
