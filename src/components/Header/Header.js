@@ -69,6 +69,7 @@ function Header({setAuth, auth, setContentAuth, contentauth}) {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = useState(null);
     const [code, setCode] = useState("");
+    const [name, setName] = useState("");
     const open = Boolean(anchorEl);
 
     const handleChange = (event) => {
@@ -91,6 +92,7 @@ function Header({setAuth, auth, setContentAuth, contentauth}) {
             name: res.profileObj.name
           }
           setContentAuth(data.googleId)
+          setName(data.name)
           console.log(data.googleId)
             axios.post("https://targetsynergy-backend.herokuapp.com/user", data)
             .then(r =>console.log("success"))
@@ -147,7 +149,7 @@ function Header({setAuth, auth, setContentAuth, contentauth}) {
                     <Submit code={code} />
                     &nbsp; &nbsp;
                     
-
+                    <div style={{fontFamily:"Helvetica", fontSize:"1.1em"}}>{name}</div>
                         <div>
                             { !auth &&<IconButton
                                 aria-label="account of current user"
