@@ -46,7 +46,7 @@ const useStyles = makeStyles(() => ({
     },
 }))
 
-export default function User({setAuth}) {
+export default function User({setAuth, setName}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const history=useHistory();
   const handleClick = (event) => {
@@ -59,6 +59,7 @@ export default function User({setAuth}) {
 
   const onSuccess = (res)=>{
     console.log("log out");
+    setName("");
     setAuth(false)
     history.push("/")
     console.log('set false')
