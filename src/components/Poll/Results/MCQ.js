@@ -79,20 +79,21 @@ const MCQ = (props) => {
 
   return (
     <div>
-       
-       <div style={{
+        <div className='header' style={{
           backgroundColor: Background.bgcolor,
-          opacity: Background.opacity,
-          color: Background.textcolor,
-          width: '100%',
-          height:'100%'}}>
+          opacity: Background.opacity/100,
+          color: Background.textcolor
+
+        }}>
           <h1 className='title'>{question}</h1>
-        <div>
+          <div className='links'>
+          </div>
+        </div>
+        <div style={{width : "50%" , margin:"auto"}}>
         <Bar data={data} options={options} />
         </div>
-        </div>
-      
-        </div>
+        
+    </div>
   )
 }
 
