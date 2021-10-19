@@ -128,7 +128,7 @@ function Header({setAuth, auth, setContentAuth, contentauth}) {
                     &nbsp;&nbsp;
                     <Typography className={classes.title} variant="h6" noWrap >
 
-                        <Service setAuth={setAuth} auth={auth} contentauth={contentauth} setContentAuth={setContentAuth}/>
+                        <Service setAuth={setAuth} auth={auth} contentauth={contentauth} setContentAuth={setContentAuth} setName={setName}/>
 
                     </Typography>
                     <div className={classes.search}>

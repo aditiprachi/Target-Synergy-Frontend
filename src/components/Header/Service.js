@@ -43,7 +43,7 @@ const StyledMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem);
 
- function Service({setAuth, auth,setContentAuth,contentauth}) {
+ function Service({setAuth, auth,setContentAuth,contentauth,setName}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -63,6 +63,11 @@ const StyledMenuItem = withStyles((theme) => ({
       }
       setContentAuth(data.googleId)
       console.log(contentauth)
+    axios.get(`https://targetsynergy-backend.herokuapp.com/user/${data.googleId}`)
+    .then(res=>{
+      console.log(res.data)
+      setName(res.data.name)
+    })
       
         axios.post("https://targetsynergy-backend.herokuapp.com/user", data)
         .then(r =>console.log("success"))
