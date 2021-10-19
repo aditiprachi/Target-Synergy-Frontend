@@ -91,7 +91,7 @@ function Header({setAuth, auth, setContentAuth, contentauth}) {
             email: res.profileObj.email,
             name: res.profileObj.name
           }
-          setContentAuth(data.googleId)
+          setContentAuth(res.profileObj.googleId)
           axios.get(`https://targetsynergy-backend.herokuapp.com/user/${res.profileObj.googleId}`)
             .then(result=>{
                 console.log(result.data)
