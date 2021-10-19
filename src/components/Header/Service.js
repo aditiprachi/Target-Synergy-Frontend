@@ -61,12 +61,12 @@ const StyledMenuItem = withStyles((theme) => ({
         email: res.profileObj.email,
         name: res.profileObj.name 
       }
-      setContentAuth(data.googleId)
+      setContentAuth(res.profileObj.googleId)
       console.log(contentauth)
-    axios.get(`https://targetsynergy-backend.herokuapp.com/user/${data.googleId}`)
-    .then(res=>{
-      console.log(res.data)
-      setName(res.data.name)
+    axios.get(`https://targetsynergy-backend.herokuapp.com/user/${res.profileObj.googleId}`)
+    .then(result=>{
+      console.log(result.data)
+      setName(result.data.name)
     })
       
         axios.post("https://targetsynergy-backend.herokuapp.com/user", data)

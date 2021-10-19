@@ -92,10 +92,10 @@ function Header({setAuth, auth, setContentAuth, contentauth}) {
             name: res.profileObj.name
           }
           setContentAuth(data.googleId)
-          axios.get(`https://targetsynergy-backend.herokuapp.com/user/${data.googleId}`)
-            .then(res=>{
-                console.log(res.data)
-                setName(res.data.name)
+          axios.get(`https://targetsynergy-backend.herokuapp.com/user/${res.profileObj.googleId}`)
+            .then(result=>{
+                console.log(result.data)
+                setName(result.data.name)
             })
           
           console.log(data.googleId)

@@ -30,18 +30,23 @@ function MainCards({setAuth,auth,setContentAuth,contentauth}) {
     const data =  {
         googleId: res.profileObj.googleId,
         email: res.profileObj.email,
-        name: res.profileObj.name
-        
+        name: res.profileObj.name 
       }
-      setContentAuth(data.googleId)
+      setContentAuth(res.profileObj.googleId)
       console.log(contentauth)
-
+    axios.get(`https://targetsynergy-backend.herokuapp.com/user/${res.profileObj.googleId}`)
+    .then(result=>{
+      console.log(result.data)
+      setName(result.data.name)
+    })
+      
         axios.post("https://targetsynergy-backend.herokuapp.com/user", data)
         .then(r =>console.log("success"))
         .catch(err => { 
         console.error(err);
       });
       setAuth(true);
+      console.log(auth)
       
       
 }
