@@ -36,6 +36,7 @@ function MainCards({setAuth,auth,setContentAuth,contentauth}) {
       console.log(contentauth)
     axios.get(`https://targetsynergy-backend.herokuapp.com/user/${res.profileObj.googleId}`)
     .then(result=>{
+      
       console.log(result.data)
       setName(result.data.name)
     })
